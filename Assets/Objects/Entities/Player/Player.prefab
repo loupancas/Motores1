@@ -178,7 +178,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3527083418525231824}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -335,7 +335,11 @@ GameObject:
   - component: {fileID: 8937150237214610822}
   - component: {fileID: 6192775225365806654}
   - component: {fileID: 8939868180292089119}
-  m_Layer: 0
+  - component: {fileID: 7526290610132588217}
+  - component: {fileID: 1081083913539912180}
+  - component: {fileID: 3952122559926541695}
+  - component: {fileID: 1479613808}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -376,7 +380,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &8939868180292089119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,10 +398,11 @@ MonoBehaviour:
   sprintspeed: 10
   crouchspeed: 5
   walkspeed: 0
+  climbspeed: 3
   rotation: 0
   jumpKey: 32
   sprintKey: 304
-  crouchKey: 306
+  crouchKey: 99
   jumpForce: 15
   jumpCooldown: 0.25
   airMult: 0.08
@@ -410,7 +415,89 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 1024
+  Walls:
+    serializedVersion: 2
+    m_Bits: 2048
   grounded: 0
   grounddrag: 1
   state: 0
   entryimputs: 0
+  player_Climbing: {fileID: 3952122559926541695}
+  climbing: 0
+--- !u!114 &7526290610132588217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615787014974170500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe777ce5e7717734dbe85f75fa957182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerorientation: {fileID: 4529771275831774105}
+  playerobj: {fileID: 2547104704262693634}
+  maxslidetime: 0.75
+  slideforce: 20
+  slideYscale: 0.5
+  slidekey: 306
+--- !u!114 &1081083913539912180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615787014974170500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b6f0f259d7822b43baa772a16ba414f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3952122559926541695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615787014974170500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0641ee4fd53388f419e84d24adf7092f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 4529771275831774105}
+  rb: {fileID: 6192775225365806654}
+  walls:
+    serializedVersion: 2
+    m_Bits: 2048
+  Ground:
+    serializedVersion: 2
+    m_Bits: 1024
+  player_Move: {fileID: 8939868180292089119}
+  climbspeed: 15
+  maxclimbtime: 0.75
+  climbjumpforce: 12
+  climbjumpback: 30
+  climbjump: 32
+  climbjumps: 1
+  exitingwall: 0
+  exitingwalltime: 0.2
+  minwallnormalchange: 0
+  detectionlenght: 0.7
+  spherecastradius: 0.15
+  maxwallangle: 30
+  minwallnormalanglechange: 0
+--- !u!114 &1479613808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615787014974170500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 576f2490573b2354987e857ab24e4763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialLife: 100

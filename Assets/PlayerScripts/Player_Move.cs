@@ -18,6 +18,7 @@ public class Player_Move : MonoBehaviour
     public float sprintspeed;
     public float crouchspeed;
     public float walkspeed;
+    public float climbspeed;
 
     Rigidbody Rb;
 
@@ -42,19 +43,23 @@ public class Player_Move : MonoBehaviour
     public float maxSlopeAngle;
     private RaycastHit slopehit; //voy a usar un raycasta para detectar y calcular el angulo de subida
     [SerializeField] bool exitingslope;
-  
+
 
     [Header("Ground Check")] //chequear que el personaje este en el suelo
-    [SerializeField] float playerheight;
+    public float playerheight;
 
     public LayerMask ground;
+    public LayerMask Walls;
 
-    [SerializeField]bool grounded;
-    [SerializeField] float grounddrag=1;
+    public bool grounded;
+    [SerializeField] float grounddrag = 1;
 
     public Movementstate state; // variable enum, para guardar el estado del enum actual
 
     [SerializeField] bool entryimputs;
+
+    [Header("Scriptreferences")]
+    public Player_Climbing player_Climbing;
 
     public enum Movementstate //enum que se encarga de indicar el estado de movimiento del PJ
     {
@@ -62,7 +67,11 @@ public class Player_Move : MonoBehaviour
         sprinting,
         jumping,
         crouching,
+        climbing,
+        jumpwall,
     }
+
+    public bool climbing;
 
     public void Start()
     {
@@ -80,18 +89,17 @@ public class Player_Move : MonoBehaviour
 
     public void Update()
     {
-        //chequeo si el PJ esta tocando el suelo (para hacerlo, tiro un raycast que servira para medir la distancia entre el centro del PJ y el suelo)
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerheight * 0.5f + 0.2f, ground);
 
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerheight * 0.5f + 0.2f, ground);
         Myinput();
         Statehandler();
         Clampvelocity();
 
         //drag (evitar que el PJ resbale )
-     
-        if(Onslope() && grounded)
+
+        if (Onslope() && grounded)
         {
-            Rb.drag = grounddrag +(8*2f);
+            Rb.drag = grounddrag + (8 * 2f);
         }
         else if (grounded && !Onslope())
         {
@@ -103,71 +111,81 @@ public class Player_Move : MonoBehaviour
         }
 
     }
-     private void FixedUpdate()
-     {
-            PlayerMove();
-           // print("velocidad"+Rb.velocity.magnitude);
-             print("rotation" + rotation);
-     }
+    private void FixedUpdate()
+    {
+        PlayerMove();
+        // print("velocidad"+Rb.velocity.magnitude);
+        print("rotation" + rotation);
+    }
 
     private void Myinput() //recibir inputs
     {
         horizontalimput = Input.GetAxisRaw("Horizontal");
         verticalimput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKey(jumpKey) && readyjump && grounded)
+        if (Input.GetKey(jumpKey) && readyjump && grounded && !player_Climbing.exitingwall)
         {
-            readyjump= false;
+            readyjump = false;
 
             jump();
 
-            Invoke(nameof(resetjump),jumpCooldown); //llamar resetjump con un delay de cooldown (here be code dragons)
+            Invoke(nameof(resetjump), jumpCooldown); //llamar resetjump con un delay de cooldown (here be code dragons)
         }
 
         // start crouch
 
-         if(Input.GetKeyDown(crouchKey)) //transformar el tamaño Y
-         {
+        if (Input.GetKeyDown(crouchKey)) //transformar el tamaño Y
+        {
             transform.localScale = new Vector3(transform.localScale.x, crouchYscale, transform.localScale.z);
             Rb.AddForce(Vector3.down * 5f, ForceMode.Impulse); //empujar al player al suelo :)
-         }
+        }
 
-         //stop crouch
-         if(Input.GetKeyUp(crouchKey)) //detectar que el PJ se levanto
-         {
-            transform.localScale = new Vector3(transform.localScale.x,baseYscale , transform.localScale.z);
-         }
+        //stop crouch
+        if (Input.GetKeyUp(crouchKey)) //detectar que el PJ se levanto
+        {
+            transform.localScale = new Vector3(transform.localScale.x, baseYscale, transform.localScale.z);
+        }
     }
 
-   
+
 
     private void Statehandler() //para navegar los distintos estados del PJ
     {
-        //estado - correr
-       if(grounded && Input.GetKey(sprintKey))
-       {
-            state= Movementstate.sprinting;
-            Movespeed = sprintspeed;
-       }
-       //estado -agachado
-       else if(grounded && Input.GetKey(crouchKey))
-       {
-            state=Movementstate.crouching;
-            Movespeed= crouchspeed;
+        if (climbing)
+        {
+            state = Movementstate.climbing;
+            Movespeed = climbspeed;
+        }
+        else if (climbing && player_Climbing.exitingwall)
+        {
+            state = Movementstate.jumpwall;
+        }
 
-       }
-       //estado - caminando
-       else if(grounded)
-       {
+        //estado - correr
+        else if (grounded && Input.GetKey(sprintKey))
+        {
+            state = Movementstate.sprinting;
+            Movespeed = sprintspeed;
+        }
+        //estado -agachado
+        else if (grounded && Input.GetKey(crouchKey))
+        {
+            state = Movementstate.crouching;
+            Movespeed = crouchspeed;
+
+        }
+        //estado - caminando
+        else if (grounded)
+        {
             state = Movementstate.walking;
             Movespeed = walkspeed;
 
-       }
-       //estado-en el aire
-       else
-       {
+        }
+        //estado-en el aire
+        else
+        {
             state = Movementstate.jumping;
-       }
+        }
 
 
     }
@@ -175,22 +193,27 @@ public class Player_Move : MonoBehaviour
 
     private void PlayerMove() //movimiento del player
     {
+        if (player_Climbing.exitingwall)
+        {
+            return;
+        }
+
         //calcular la direccion de movimiento en el suelo
         Movedirection = Orientation.forward * verticalimput + Orientation.right * horizontalimput;
 
         if (Onslope() && !exitingslope) //modificar movimiento para aplicarse en angulo
         {
-             Rb.AddForce(GetSlopeProjectAngle()*Movespeed*40f,ForceMode.Force);
+            Rb.AddForce(GetSlopeProjectAngle(Movedirection) * Movespeed * 40f, ForceMode.Force);
 
-                if(Rb.velocity.y > 0) //solucionar un problema causado por desactivar gravedad
-                {
-                    Rb.AddForce(Vector3.down * 80f, ForceMode.Force);
-                }
+            if (Rb.velocity.y > 0) //solucionar un problema causado por desactivar gravedad
+            {
+                Rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+            }
         }
         //en el suelo
-        else if(grounded)
+        else if (grounded)
         {
-            Rb.AddForce(Movedirection.normalized * Movespeed * 10f,ForceMode.Force);
+            Rb.AddForce(Movedirection.normalized * Movespeed * 10f, ForceMode.Force);
         }
         //en el aire
         else if (!grounded)
@@ -205,39 +228,44 @@ public class Player_Move : MonoBehaviour
     private void Clampvelocity() //para evitar que la velocidad supere el maximo admitido
     {
 
-        if(Onslope() && !exitingslope)//solucionar aceleracion en slopes
+        if (Onslope() && !exitingslope)//solucionar aceleracion en slopes
         {
-            if(Rb.velocity.magnitude>Movespeed)
+            if (Rb.velocity.magnitude > Movespeed)
             {
                 Rb.velocity = Rb.velocity.normalized * Movespeed;
             }
         }
         else
         {
-            Vector3 flatvelocity = new Vector3(Rb.velocity.x,0f,Rb.velocity.z);
+            Vector3 flatvelocity = new Vector3(Rb.velocity.x, 0f, Rb.velocity.z);
 
-                    //limitar velocidad maxima
+            //limitar velocidad maxima
 
-                    if (flatvelocity.magnitude > Movespeed)
-                    {
-                        Vector3 limitedvel = flatvelocity.normalized * Movespeed; //basicamente reduzco la velocidad actual a la limitada :) (menos Y)
+            if (flatvelocity.magnitude > Movespeed)
+            {
+                Vector3 limitedvel = flatvelocity.normalized * Movespeed; //basicamente reduzco la velocidad actual a la limitada :) (menos Y)
 
-                        Rb.velocity= new Vector3(limitedvel.x,Rb.velocity.y, limitedvel.z);
-                    }
+                Rb.velocity = new Vector3(limitedvel.x, Rb.velocity.y, limitedvel.z);
+            }
 
         }
 
-        
+
     }
 
     private void jump() //salto del PJ
     {
+        if (player_Climbing.exitingwall)
+        {
+            return;
+        }
+
         exitingslope = true;
 
         //resetear la velocidad Y del Pj
         Rb.velocity = new Vector3(Rb.velocity.x, 0f, Rb.velocity.z);
 
-        Rb.AddForce(transform.up* jumpForce, ForceMode.Impulse);
+        Rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
 
 
     }
@@ -246,12 +274,12 @@ public class Player_Move : MonoBehaviour
     {
         readyjump = true;
 
-        exitingslope=false;
+        exitingslope = false;
     }
 
-    private bool Onslope()//booleano para detectar que estamos tocando una rampa (here de code dragons)
+    public bool Onslope()//booleano para detectar que estamos tocando una rampa (here de code dragons)
     {
-        if(Physics.Raycast(transform.position,Vector3.down,out slopehit,playerheight*0.5f+0.3f))
+        if (Physics.Raycast(transform.position, Vector3.down, out slopehit, playerheight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopehit.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -261,8 +289,11 @@ public class Player_Move : MonoBehaviour
         return false;
     }
 
-    private Vector3 GetSlopeProjectAngle() //proyectar el angulo de movimiento en el angulo de la rampa, para permitir que se mueva correctamente (here be code dragons)
+    public Vector3 GetSlopeProjectAngle(Vector3 direction) //proyectar el angulo de movimiento en el angulo de la rampa, para permitir que se mueva correctamente (here be code dragons)
     {
-        return Vector3.ProjectOnPlane(Movedirection,slopehit.normal).normalized;
+        return Vector3.ProjectOnPlane(direction, slopehit.normal).normalized;
+
+
+
     }
 }
