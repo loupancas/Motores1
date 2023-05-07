@@ -47,5 +47,12 @@ public class Player : LifeEntity
 
     }
 
+    public void Health(int value)
+    {
+        
+    }
+
+
+
 
 }
