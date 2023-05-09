@@ -60,6 +60,7 @@ public class Player_Move : MonoBehaviour
 
     [Header("Scriptreferences")]
     public Player_Climbing player_Climbing;
+    public Player_Ledge_Grab ledge_Grab;
 
     public enum Movementstate //enum que se encarga de indicar el estado de movimiento del PJ
     {
@@ -69,14 +70,21 @@ public class Player_Move : MonoBehaviour
         crouching,
         climbing,
         jumpwall,
+        freeze,
+        unlimited,
     }
 
     public bool climbing;
+    public bool freeze;
+    public bool unlimited;
+
+    public bool restricted;
 
     public void Start()
     {
         Rb = GetComponent<Rigidbody>();
         Rb.freezeRotation = true; //evitar rotacion :)
+        ledge_Grab = GetComponent<Player_Ledge_Grab>();
 
         walkspeed = Movespeed;
 
@@ -151,11 +159,29 @@ public class Player_Move : MonoBehaviour
 
     private void Statehandler() //para navegar los distintos estados del PJ
     {
-        if (climbing)
+        //estado - congelado
+        if (freeze)
+        {
+            state = Movementstate.freeze;
+            Rb.velocity = Vector3.zero;
+        }
+
+        // estado -  sin limites
+        else if (unlimited)
+        {
+            state = Movementstate.unlimited;
+            Movespeed = 999f;
+            return;
+        }
+
+        //estado - trepar
+        else if (climbing)
         {
             state = Movementstate.climbing;
             Movespeed = climbspeed;
         }
+
+        //estado - saliendo trepar
         else if (climbing && player_Climbing.exitingwall)
         {
             state = Movementstate.jumpwall;
@@ -193,10 +219,12 @@ public class Player_Move : MonoBehaviour
 
     private void PlayerMove() //movimiento del player
     {
-        if (player_Climbing.exitingwall)
+        if (player_Climbing.exitingwall || restricted)
         {
             return;
         }
+
+
 
         //calcular la direccion de movimiento en el suelo
         Movedirection = Orientation.forward * verticalimput + Orientation.right * horizontalimput;
@@ -255,7 +283,7 @@ public class Player_Move : MonoBehaviour
 
     private void jump() //salto del PJ
     {
-        if (player_Climbing.exitingwall)
+        if (player_Climbing.exitingwall||ledge_Grab.exitingledge || ledge_Grab.holdingledge)
         {
             return;
         }

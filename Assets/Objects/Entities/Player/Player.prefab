@@ -336,9 +336,9 @@ GameObject:
   - component: {fileID: 6192775225365806654}
   - component: {fileID: 8939868180292089119}
   - component: {fileID: 7526290610132588217}
-  - component: {fileID: 1081083913539912180}
   - component: {fileID: 3952122559926541695}
   - component: {fileID: 1479613808}
+  - component: {fileID: 2696850498379052964}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -424,6 +424,9 @@ MonoBehaviour:
   entryimputs: 0
   player_Climbing: {fileID: 3952122559926541695}
   climbing: 0
+  freeze: 0
+  unlimited: 0
+  restricted: 0
 --- !u!114 &7526290610132588217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,18 +445,6 @@ MonoBehaviour:
   slideforce: 20
   slideYscale: 0.5
   slidekey: 306
---- !u!114 &1081083913539912180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8615787014974170500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b6f0f259d7822b43baa772a16ba414f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3952122559926541695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,3 +492,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialLife: 100
+--- !u!114 &2696850498379052964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615787014974170500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b87734d037bfa014ebbfefc744c186c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_move: {fileID: 8939868180292089119}
+  orientation: {fileID: 4529771275831774105}
+  ledgecamera: {fileID: 0}
+  Rb: {fileID: 6192775225365806654}
+  movetoledgespeed: 12
+  maxlengthgrabledge: 2
+  minimumtimeledge: 0.5
+  holdingledge: 0
+  ledgedetectionlength: 3
+  ledgespherecastradius: 0.5
+  Ledges:
+    serializedVersion: 2
+    m_Bits: 4096

@@ -11,6 +11,7 @@ public class Player_Climbing : MonoBehaviour
     public LayerMask walls;
     public LayerMask Ground;
     public Player_Move player_Move;
+    public Player_Ledge_Grab player_Ledge_Grab;
 
     [Header("Climbing")]
     [SerializeField] float climbspeed;
@@ -49,13 +50,17 @@ public class Player_Climbing : MonoBehaviour
     public float minwallnormalanglechange;
 
 
+    public void Start()
+    {
+        player_Ledge_Grab = GetComponent<Player_Ledge_Grab>(); 
+    }
 
     private void Update()
     {
         Wallcheck();
         StateMachine(); 
 
-        if(IsClimbing && !exitingwall)
+        if(IsClimbing && !exitingwall && (!player_Ledge_Grab.holdingledge || !player_Ledge_Grab.exitingledge))
         {
             WallClimbMovement(); 
         }
@@ -65,8 +70,15 @@ public class Player_Climbing : MonoBehaviour
 
     private void StateMachine()
     {
+        /*//estado - ledge grabbing
+        if(player_Ledge_Grab.holdingledge || player_Ledge_Grab.exitingledge) 
+        {
+             EndWallClimb(); //esto evita que el PJ siga trepando mientras esta agarrado a un ledge
+        }
+        */
+
         //comenzar a trepar
-        if(wallInFront && Input.GetKey(KeyCode.W) && currentwallangle < maxwallangle && !exitingwall)
+         if(wallInFront && Input.GetKey(KeyCode.W) && currentwallangle < maxwallangle && !exitingwall)
         {
             if (!IsClimbing && climbtime > 0)
             {
@@ -163,16 +175,24 @@ public class Player_Climbing : MonoBehaviour
 
     public void ClimbJumping()
     {
-        exitingwall = true;
-        exitwalltimer = exitingwalltime;
+        if (player_Move.grounded) return;
 
-        //fuerza de salto
-         Vector3 forcetoapply = transform.up * climbjumpforce + frontwallhit.normal *climbjumpback *5f;
+        //if (player_Ledge_Grab.holdingledge || player_Ledge_Grab.exitingledge) return;
+        
+      
+            exitingwall = true;
+                    exitwalltimer = exitingwalltime;
 
-        rb.velocity= new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(forcetoapply, ForceMode.Impulse); //aplucar salto
+                    //fuerza de salto
+                     Vector3 forcetoapply = transform.up * climbjumpforce + frontwallhit.normal *climbjumpback *5f;
 
-        climbjumpsleft--;
+                    rb.velocity= new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+                    rb.AddForce(forcetoapply, ForceMode.Impulse); //aplucar salto
+
+                    climbjumpsleft--;
+        
+
+        
     }
 
 }
