@@ -23498,6 +23498,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2696850498379052964, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
+      propertyPath: ledgecamera
+      value: 
+      objectReference: {fileID: 819505089}
     - target: {fileID: 8615787014974170500, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -23545,6 +23549,10 @@ PrefabInstance:
     - target: {fileID: 8937150237214610822, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8939868180292089119, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
+      propertyPath: ledge_Grab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
@@ -23681,6 +23689,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7806213329663986790, guid: 4482c12b47bfb5040be89d253b030e2a, type: 3}
+      propertyPath: EV_OnplayerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8157772912472631986, guid: 4482c12b47bfb5040be89d253b030e2a, type: 3}
       propertyPath: m_RootOrder
       value: 11
