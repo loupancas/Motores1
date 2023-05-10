@@ -8,6 +8,7 @@ public class Playercamera : MonoBehaviour
     public float sensitivityY = 1.0f;
 
     public Transform cameraorientation;
+    public Transform weaponpos;
 
     float Xrotation;
     float Yrotation;
@@ -17,7 +18,8 @@ public class Playercamera : MonoBehaviour
         //configuracion del mouse en la pantalla
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
+        GameManager.instance.camPos = transform;
+        GameManager.instance.weaponpos = weaponpos;
     }
 
     private void Update()

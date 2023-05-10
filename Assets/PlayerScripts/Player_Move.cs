@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Entities.WeaponHolder;
 
 public class Player_Move : MonoBehaviour
 {
+    WeaponHolder weaponholder;
+
     [Header("movement")]
     public float Movespeed;
     public Transform Orientation;
@@ -153,6 +156,8 @@ public class Player_Move : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x, baseYscale, transform.localScale.z);
         }
+
+        
     }
 
 

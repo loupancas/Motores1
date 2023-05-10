@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     
     public Player player;
+    public Transform camPos;
+    public Transform weaponpos;
     
     public void SetPlayer(Player _player)
     {

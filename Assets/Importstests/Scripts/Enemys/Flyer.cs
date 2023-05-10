@@ -125,7 +125,6 @@ public class Flyer : Enemy
             }
             else
             {
-                Debug.Log("Vamo a bajar");
                 up_down = false;
             }
 
@@ -139,7 +138,6 @@ public class Flyer : Enemy
             else
             {
                 up_down = true;
-                Debug.Log("Vamo a subir");
             }
         }
 
