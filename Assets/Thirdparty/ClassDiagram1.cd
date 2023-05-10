@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Pick">
+    <Position X="5.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Abstracts\Pick.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="2.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEACAAAACAAAAgAAAAAAAAAAEgCAAABAAIAAJEAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Character\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BulletEnemy">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAIAAAAAQAAQAAACABAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Enemys\BulletEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chaser">
+    <Position X="19.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAAACAAAAAAJAAAAIAAAAAAABAAABAACAAAAEg=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Enemys\Chaser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemigo1">
+    <Position X="15.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Enemys\Enemigo1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemigo2">
+    <Position X="10.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADQAAAAAAIAABAAAAIAAAAAAAACAAAAAAAAAADAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Enemys\Enemigo2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemigo3">
+    <Position X="12" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQoAAAAAAAAAAAAAAAAAAAAAIAAAAAACBAAAAAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Enemys\Enemigo3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy">
+    <Position X="14" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAAEKIAAMAAAAAAAAAIAIAAAAAhAAQAAwAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Enemys\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Flyer">
+    <Position X="17.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAYSCAAQAACNAYAAAAAAMAAERAAQAIgAARAgAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Enemys\Flyer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.LifeSystem.Life">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgABAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Entities\Life.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LifeEntity">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAQAAAAIAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Entities\LifeEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayObject">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAAiAAAQgAAAYAAAAAAAACAAABAAIAABkAAEA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Entities\PlayObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQhAAAAACAAABAAAAEAAAAgAQBDAAABAGAAAAAEIEA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealthBox">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAEAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Picks\HealthBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSensor">
+    <Position X="12" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAgAAAAAAAAEAICAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Sensor\PlayerSensor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="bullet">
+    <Position X="6" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Weapon\bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shoot">
+    <Position X="7.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAQAAAAAAQAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Weapon\Shoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Telekinesis">
+    <Position X="9.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCACAAACAAAAAAAAAEBSBACAAAAAAAgAAKAIAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Weapon\Telekinesis.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon">
+    <Position X="7.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQKAAgQAAAAggAQAQBAAAEAAAQAAAAEAQQAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Weapon\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.WeaponHolder.WeaponHolder">
+    <Position X="6" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAgIAAAAAAAAAAAAACAAAAAAAAEgAAIAAAAA=</HashCode>
+      <FileName>Assets\Importstests\Scripts\Weapon\WeaponHolder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="cameraholderposition">
+    <Position X="14.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\PlayerScripts\cameraholderposition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player_Climbing">
+    <Position X="18.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>VQ0TAIAAAKAIAAQEECAAAAFgYAAAEgAEGIAIhhAAEAg=</HashCode>
+      <FileName>Assets\PlayerScripts\Player_Climbing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player_Move">
+    <Position X="16.5" Y="10.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Player_Move.Movementstate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\PlayerScripts\Player_Move.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>JYQSAEgAAyEAwEEBAACEFAEASMAAAFAUADoAAoCgAEg=</HashCode>
+      <FileName>Assets\PlayerScripts\Player_Move.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Playercamera">
+    <Position X="13" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEACAAAAAADAIAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\PlayerScripts\Playercamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="sliding">
+    <Position X="20.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAACiAAQgEEAAAAAAEAAIAAAEAEAAABAhAAAAg=</HashCode>
+      <FileName>Assets\PlayerScripts\sliding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player_Ledge_Grab">
+    <Position X="22.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CJQBAMAAiCIEAAAAAAABzJAABABACUAAAAAAUCQARAA=</HashCode>
+      <FileName>Assets\PlayerScripts\Player_Ledge_Grab.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
