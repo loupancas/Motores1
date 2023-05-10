@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
 
 
 
-    private void Start()
+    protected virtual void Start()
     {
         healthPoint = maxHealthPoint;
 

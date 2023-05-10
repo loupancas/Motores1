@@ -32,8 +32,9 @@ public class Flyer : Enemy
     
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         target = GameManager.instance.playerInstance;
         y = monitoringPoint.position.y;
     }
@@ -101,13 +102,13 @@ public class Flyer : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        //Si golpea al jugador retrocede
-        Debug.Log(other.gameObject.name);
-        hitting = true;
+        
+        
         if (other.gameObject.name == target.gameObject.name)
         {
-            
-            Debug.Log("volador golpea al player");
+            hitting = true;
+            var playerRef = other.gameObject.GetComponent<Player>();
+            playerRef.TakeDamage(5);
         }
     }
     
