@@ -27,7 +27,16 @@ public class BulletEnemy : MonoBehaviour
     {
         if (c.gameObject.layer == playerMask)
         {
-            Destroy(gameObject);
+            if(c.GetComponent<Player>()!=null)
+            {
+
+                c.GetComponent<Player>().TakeDamage(10);
+                Destroy(gameObject);
+            }
+            
+            
+            
+            
         }
     }
 
