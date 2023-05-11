@@ -6,7 +6,7 @@ using Entities.WeaponHolder;
 
 public class Player : LifeEntity
 {
-    
+    public ManagerUI ManagerUI;
     public WeaponHolder weaponholder;
 
     [SerializeField] KeyCode weapon1 = KeyCode.Alpha1;
@@ -71,7 +71,13 @@ public class Player : LifeEntity
         
     }
 
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
 
+        ManagerUI.UpdateLife(life.Live, life.lifeMax);
+
+    }
 
 
 }

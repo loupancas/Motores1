@@ -5,7 +5,7 @@ using Entities.LifeSystem;
 
 public abstract class LifeEntity : PlayObject
 {
-    Life life;
+    protected Life life;
     [SerializeField] int initialLife = 100;
 
     public override void Initialize()
@@ -14,7 +14,7 @@ public abstract class LifeEntity : PlayObject
         life = new Life(initialLife);
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         life.Live -= damage;
     }

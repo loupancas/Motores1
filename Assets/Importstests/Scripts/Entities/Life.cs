@@ -8,7 +8,7 @@ namespace Entities.LifeSystem
 public class Life 
 {
     private int life;
-    private int lifeMax;
+    public int lifeMax;
 
     public int Live
     {
