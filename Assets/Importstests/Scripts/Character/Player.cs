@@ -6,7 +6,7 @@ using Entities.WeaponHolder;
 
 public class Player : LifeEntity
 {
-    Life life;
+    
     public WeaponHolder weaponholder;
 
     [SerializeField] KeyCode weapon1 = KeyCode.Alpha1;
