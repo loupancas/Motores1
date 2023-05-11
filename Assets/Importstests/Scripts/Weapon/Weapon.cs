@@ -53,13 +53,19 @@ public class Weapon : MonoBehaviour
         bullets += recharge;
     }
 
+    public virtual void Attack()
+    {
+
+    }
+
     protected void OnTriggerEnter(Collider other)
     { 
         if(other.gameObject.name == "Player")
         {
             Debug.Log(playerref);
             onground = false;
-            playerref.weaponholder.AddWeapon(ID, this.gameObject);
+            //Deberia cargar el objeto Weapon
+            playerref.weaponholder.AddWeapon(ID, this);
             col.enabled = false;
         }
     }

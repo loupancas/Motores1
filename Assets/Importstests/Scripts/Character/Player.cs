@@ -46,6 +46,7 @@ public class Player : LifeEntity
 
     protected override void OnUpdate()
     {
+        
         if (Input.GetKey(weapon1))
         {
             Debug.Log("cambio a arma 1 ");
@@ -58,6 +59,7 @@ public class Player : LifeEntity
         }
         if(weaponholder.weapon != null)
         {
+            weaponholder.weapon.Attack();
             weaponholder.weapon.transform.position = weaponholder.weaponpos.position;
             weaponholder.weapon.transform.forward = weaponholder.camera.forward;
         }

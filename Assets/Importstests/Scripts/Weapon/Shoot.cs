@@ -13,8 +13,10 @@ public class Shoot : Weapon
         base.Start();
         ID = 0;
     }
-    void Update()
+
+    public override void Attack()
     {
+        base.Attack();
         if (!onground)
         {
             if (Input.GetButtonDown("Fire1"))
@@ -31,12 +33,6 @@ public class Shoot : Weapon
                 }
             }
         }
-        
-
-
-
-
-
-
     }
+
 }

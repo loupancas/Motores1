@@ -6,8 +6,9 @@ namespace Entities.WeaponHolder
 {
     public class WeaponHolder
     {
-        public GameObject[] weaponholder;
-        public GameObject weapon;
+        //estos deberian ser objetos Weapon
+        public Weapon[] weaponholder;
+        public Weapon weapon;
         public Transform weaponpos;
         public Transform camera;
         public int actualID = 0;
@@ -15,11 +16,11 @@ namespace Entities.WeaponHolder
         {
             weaponpos = _weaponpos;
             camera = _camera;
-            weaponholder = new GameObject[10];
+            weaponholder = new Weapon[10];
             weapon = weaponholder[0];
         }
 
-        public void AddWeapon(int ID, GameObject _weapon)
+        public void AddWeapon(int ID, Weapon _weapon)
         {
                
             weaponholder[ID] = _weapon;
@@ -38,10 +39,10 @@ namespace Entities.WeaponHolder
                 {
                     if(weaponholder[actualID] != null)
                     {
-                        weaponholder[actualID].SetActive(false);
+                        weaponholder[actualID].gameObject.SetActive(false);
                     }
                     
-                    weaponholder[ID].SetActive(true);                    
+                    weaponholder[ID].gameObject.SetActive(true);                    
                     weapon = weaponholder[ID];
                     Debug.Log("arma " + weapon);
                     actualID = ID;
@@ -54,7 +55,6 @@ namespace Entities.WeaponHolder
 
         }
 
-        
     }
 
 }

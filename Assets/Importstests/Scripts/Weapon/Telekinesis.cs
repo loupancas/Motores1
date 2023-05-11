@@ -25,8 +25,11 @@ public class Telekinesis : Weapon
         ID = 1;
     }
     // Update is called once per frame
-    void Update()
+    
+
+    public override void Attack()
     {
+        base.Attack();
         if (!onground)
         {
             if (Input.GetButtonDown("Fire1") && !hooked)
@@ -43,7 +46,6 @@ public class Telekinesis : Weapon
                 ThrowObject();
             }
         }
-        
     }
 
     void DetectionObject()
