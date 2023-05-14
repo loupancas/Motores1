@@ -1051,7 +1051,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 15423
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1093,6 +1093,7 @@ MonoBehaviour:
   sensitivityX: 200
   sensitivityY: 200
   cameraorientation: {fileID: 1286270386}
+  weaponpos: {fileID: 0}
 --- !u!1 &814366552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,6 +1385,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1179676889 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2424439752788079858, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
+  m_PrefabInstance: {fileID: 1429045332}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1238297544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,38 +1596,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 665207251517850713, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1334034558751306201, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 2696850498379052964, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
       propertyPath: ledgecamera
       value: 
       objectReference: {fileID: 697974288}
-    - target: {fileID: 2696850498379052964, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
-      propertyPath: exitledgetime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2696850498379052964, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
-      propertyPath: ledgejumpUpforce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2696850498379052964, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
-      propertyPath: ledgejumpforwardforce
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 3527083418525231824, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4994269176096245379, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8615787014974170500, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1636,7 +1614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8937150237214610822, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.117
       objectReference: {fileID: 0}
     - target: {fileID: 8937150237214610822, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2188,6 +2166,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInstance: {fileID: 0}
   player: {fileID: 0}
+  camPos: {fileID: 0}
+  weaponpos: {fileID: 0}
 --- !u!4 &2039535197
 Transform:
   m_ObjectHideFlags: 0
@@ -2300,11 +2280,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2102863403 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8937150237214610822, guid: baeaee3ccf4b3ee49bc4fd36dea9bc9b, type: 3}
-  m_PrefabInstance: {fileID: 1429045332}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2110090093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,7 +2309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59e2c5e7dad9124b9a572031392cbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraposition: {fileID: 2102863403}
+  cameraposition: {fileID: 1179676889}
 --- !u!4 &2110090095
 Transform:
   m_ObjectHideFlags: 0

@@ -61,9 +61,15 @@ public class Player_Move : MonoBehaviour
 
     [SerializeField] bool entryimputs;
 
-    [Header("Scriptreferences")]
+    [Header("references")]
     public Player_Climbing player_Climbing;
     public Player_Ledge_Grab ledge_Grab;
+    public Transform modeltransform;
+    public Animator animator;
+
+    [Header("Movementsituation")]
+    public bool sprinting = false;
+    public bool crouching = false;
 
     public enum Movementstate //enum que se encarga de indicar el estado de movimiento del PJ
     {
@@ -75,6 +81,7 @@ public class Player_Move : MonoBehaviour
         jumpwall,
         freeze,
         unlimited,
+        idle,
     }
 
     public bool climbing;
@@ -95,6 +102,9 @@ public class Player_Move : MonoBehaviour
 
         baseYscale = transform.localScale.y; //guardar la escala Y base del jugador
         crouchYscale = baseYscale / 2;
+        animator = GetComponentInChildren<Animator>();
+
+        
     }
 
 
@@ -145,7 +155,7 @@ public class Player_Move : MonoBehaviour
 
         // start crouch
 
-        if (Input.GetKeyDown(crouchKey)) //transformar el tamaño Y
+        if (Input.GetKeyDown(crouchKey) && !sprinting) //transformar el tamaño Y
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYscale, transform.localScale.z);
             Rb.AddForce(Vector3.down * 5f, ForceMode.Impulse); //empujar al player al suelo :)
@@ -157,7 +167,7 @@ public class Player_Move : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x, baseYscale, transform.localScale.z);
         }
 
-        
+     
     }
 
 
@@ -193,24 +203,51 @@ public class Player_Move : MonoBehaviour
         }
 
         //estado - correr
-        else if (grounded && Input.GetKey(sprintKey))
+        else if (grounded && Input.GetKey(sprintKey) && !crouching)
         {
             state = Movementstate.sprinting;
             Movespeed = sprintspeed;
+            sprinting = true;
+            crouching = false;
+            animator.Play("run");
         }
         //estado -agachado
-        else if (grounded && Input.GetKey(crouchKey))
+        else if (grounded && Input.GetKey(crouchKey) && !sprinting && Rb.velocity != Vector3.zero)
         {
             state = Movementstate.crouching;
             Movespeed = crouchspeed;
+            crouching = true;
+            sprinting = false;
 
+            if(Rb.velocity != Vector3.zero)
+            {
+                animator.Play("chouchwalk");
+            }
         }
         //estado - caminando
-        else if (grounded)
+        else if (grounded && Rb.velocity != Vector3.zero)
         {
             state = Movementstate.walking;
             Movespeed = walkspeed;
 
+            crouching = false;
+            sprinting = false;
+
+            animator.Play("walk");
+
+        }
+        else if(Rb.velocity==Vector3.zero)
+        {
+            state = Movementstate.idle;
+
+            if(crouching)
+            {
+                animator.Play("crouchidle");
+            }
+            else
+            {
+                animator.Play("idle");
+            }
         }
         //estado-en el aire
         else
@@ -221,7 +258,7 @@ public class Player_Move : MonoBehaviour
 
     }
 
-
+    bool isidle;
     private void PlayerMove() //movimiento del player
     {
         if (player_Climbing.exitingwall || restricted)
@@ -256,6 +293,9 @@ public class Player_Move : MonoBehaviour
 
         Rb.useGravity = !Onslope(); //desactivar gravedad para solucionar un problema con raycasting y angulos raros
 
+        
+
+       
     }
 
     private void Clampvelocity() //para evitar que la velocidad supere el maximo admitido
@@ -329,4 +369,6 @@ public class Player_Move : MonoBehaviour
 
 
     }
+
+    
 }
