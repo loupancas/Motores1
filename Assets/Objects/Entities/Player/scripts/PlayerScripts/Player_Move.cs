@@ -65,7 +65,8 @@ public class Player_Move : MonoBehaviour
     public Player_Climbing player_Climbing;
     public Player_Ledge_Grab ledge_Grab;
     public Transform modeltransform;
-    public Animator animator;
+    public Animator animatore;
+    
 
     [Header("Movementsituation")]
     public bool sprinting = false;
@@ -102,7 +103,7 @@ public class Player_Move : MonoBehaviour
 
         baseYscale = transform.localScale.y; //guardar la escala Y base del jugador
         crouchYscale = baseYscale / 2;
-        animator = GetComponentInChildren<Animator>();
+        animatore = GetComponentInChildren<Animator>();
 
         
     }
@@ -131,12 +132,20 @@ public class Player_Move : MonoBehaviour
             Rb.drag = 0;
         }
 
+        animatore.SetFloat("ejeX", horizontalimput);
+        animatore.SetFloat("EjeY", verticalimput);
+        if(grounded)
+        {
+            animatore.SetBool("onground",true);
+        }
     }
     private void FixedUpdate()
     {
         PlayerMove();
         // print("velocidad"+Rb.velocity.magnitude);
         print("rotation" + rotation);
+        falling();
+
     }
 
     private void Myinput() //recibir inputs
@@ -144,10 +153,12 @@ public class Player_Move : MonoBehaviour
         horizontalimput = Input.GetAxisRaw("Horizontal");
         verticalimput = Input.GetAxisRaw("Vertical");
 
+       
+
         if (Input.GetKey(jumpKey) && readyjump && grounded && !player_Climbing.exitingwall)
         {
             readyjump = false;
-
+            
             jump();
 
             Invoke(nameof(resetjump), jumpCooldown); //llamar resetjump con un delay de cooldown (here be code dragons)
@@ -209,7 +220,11 @@ public class Player_Move : MonoBehaviour
             Movespeed = sprintspeed;
             sprinting = true;
             crouching = false;
-            animator.Play("run");
+            animatore.SetBool("movement",true);
+            animatore.SetBool("running", true);
+            animatore.SetBool("crouched", false);
+            animatore.SetBool("jump", false);
+
         }
         //estado -agachado
         else if (grounded && Input.GetKey(crouchKey) && !sprinting && Rb.velocity != Vector3.zero)
@@ -221,7 +236,10 @@ public class Player_Move : MonoBehaviour
 
             if(Rb.velocity != Vector3.zero)
             {
-                animator.Play("chouchwalk");
+                animatore.SetBool("movement", true);
+                animatore.SetBool("running", false);
+                animatore.SetBool("crouched", true);
+                animatore.SetBool("jump", false);
             }
         }
         //estado - caminando
@@ -233,8 +251,10 @@ public class Player_Move : MonoBehaviour
             crouching = false;
             sprinting = false;
 
-            animator.Play("walk");
-
+            animatore.SetBool("movement", true);
+            animatore.SetBool("running", false);
+            animatore.SetBool("crouched", false);
+            animatore.SetBool("jump", false);
         }
         else if(Rb.velocity==Vector3.zero)
         {
@@ -242,17 +262,28 @@ public class Player_Move : MonoBehaviour
 
             if(crouching)
             {
-                animator.Play("crouchidle");
+                animatore.SetBool("movement", false);
+                animatore.SetBool("running", false);
+                animatore.SetBool("crouched", true);
+                animatore.SetBool("jump", false);
             }
             else
             {
-                animator.Play("idle");
+                animatore.SetBool("movement", false);
+                animatore.SetBool("running", false);
+                animatore.SetBool("crouched", false);
+                animatore.SetBool("jump", false);
             }
         }
         //estado-en el aire
         else
         {
             state = Movementstate.jumping;
+            
+            animatore.SetBool("movement", false);
+            animatore.SetBool("running", false);
+            animatore.SetBool("crouched", false);
+            animatore.SetBool("jump", true);
         }
 
 
@@ -335,6 +366,8 @@ public class Player_Move : MonoBehaviour
 
         exitingslope = true;
 
+       
+
         //resetear la velocidad Y del Pj
         Rb.velocity = new Vector3(Rb.velocity.x, 0f, Rb.velocity.z);
 
@@ -370,5 +403,19 @@ public class Player_Move : MonoBehaviour
 
     }
 
-    
+    private void falling()
+    {
+        if(Rb.velocity.y < -0.1f)
+        {
+            animatore.SetBool("falling", true);
+
+        }
+        else
+        {
+            animatore.SetBool("falling",false);
+            return;
+        }
+    }
+
+
 }
