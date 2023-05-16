@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: fbc9924bb09a09f4690b35a67daa4534
+  - enabled: 1
+    path: Assets/Scenes/PatoParkour.unity
+    guid: fa30d5d177b1f3e408e2412b1ac90cdd
+  - enabled: 1
+    path: Assets/Scenes/nanoScene.unity
+    guid: e0c2465e1778900448e2aa7d0455d906
   m_configObjects: {}
