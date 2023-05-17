@@ -22,6 +22,7 @@ public class Player_Move : MonoBehaviour
     public float crouchspeed;
     public float walkspeed;
     public float climbspeed;
+    public float groundmult=10f;
 
     Rigidbody Rb;
 
@@ -116,6 +117,8 @@ public class Player_Move : MonoBehaviour
         Myinput();
         Statehandler();
         Clampvelocity();
+        debuff();
+        
 
         //drag (evitar que el PJ resbale )
 
@@ -154,8 +157,8 @@ public class Player_Move : MonoBehaviour
         verticalimput = Input.GetAxisRaw("Vertical");
 
        
-
-        if (Input.GetKey(jumpKey) && readyjump && grounded && !player_Climbing.exitingwall)
+        //jump
+        if (Input.GetKey(jumpKey) && readyjump && grounded && !player_Climbing.exitingwall && !ensnared)
         {
             readyjump = false;
             
@@ -178,7 +181,16 @@ public class Player_Move : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x, baseYscale, transform.localScale.z);
         }
 
-     
+        //test 
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+
+            debuffname = "ensnare";
+            debuffduration= 1f;
+            debuffpower= 1f;
+            debuff();
+            
+        }
     }
 
 
@@ -304,7 +316,7 @@ public class Player_Move : MonoBehaviour
 
         if (Onslope() && !exitingslope) //modificar movimiento para aplicarse en angulo
         {
-            Rb.AddForce(GetSlopeProjectAngle(Movedirection) * Movespeed * 40f, ForceMode.Force);
+            Rb.AddForce(GetSlopeProjectAngle(Movedirection) * Movespeed * (4f*groundmult), ForceMode.Force);
 
             if (Rb.velocity.y > 0) //solucionar un problema causado por desactivar gravedad
             {
@@ -314,7 +326,7 @@ public class Player_Move : MonoBehaviour
         //en el suelo
         else if (grounded)
         {
-            Rb.AddForce(Movedirection.normalized * Movespeed * 10f, ForceMode.Force);
+            Rb.AddForce(Movedirection.normalized * Movespeed * (groundmult), ForceMode.Force);
         }
         //en el aire
         else if (!grounded)
@@ -415,6 +427,49 @@ public class Player_Move : MonoBehaviour
             animatore.SetBool("falling",false);
             return;
         }
+    }
+
+
+    [Header("Debuffs")]
+    public bool ensnared;
+    public string debuffname;
+    public float debuffduration, debuffpower;
+
+
+    float debufftimer, debuffpulse;
+    public void debuff()
+    {
+
+        switch (debuffname)
+        {
+
+            case "ensnare":
+                debufftimer = debuffduration;
+                if (debuffpulse <= debufftimer)
+                {
+                    debuffpulse += Time.deltaTime;
+                    groundmult = groundmult * (0.8f * debuffpower);
+                    ensnared= true;
+                }
+                else
+                {
+                    debuffpulse = 0;
+                    groundmult = 10f;
+                    ensnared = false;
+                    debuffname = null; break;
+                }
+
+
+                break;
+
+            default:
+                debuffname = null;
+                return;
+                
+        }
+
+
+
     }
 
 

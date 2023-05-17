@@ -39,7 +39,7 @@ public class sliding : MonoBehaviour
         horizontalinput = Input.GetAxisRaw("Horizontal"); //inputs
         verticalinput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKeyDown(slidekey)&& (horizontalinput !=0 || verticalinput != 0  )) //chequeo si tengo imputs correctos
+        if(Input.GetKeyDown(slidekey)&& (horizontalinput !=0 || verticalinput != 0  ) && !player_Move.ensnared) //chequeo si tengo imputs correctos
         {
             StartSlide();
         }
@@ -74,6 +74,11 @@ public class sliding : MonoBehaviour
 
     private void SlidingMovement()
     {
+
+        if(player_Move.ensnared)
+        {
+            return;
+        }
         Vector3 inputdirection = playerorientation.forward * verticalinput + playerorientation.right * horizontalinput;
 
 

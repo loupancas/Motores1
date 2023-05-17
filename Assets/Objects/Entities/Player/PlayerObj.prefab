@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 1479613808}
   - component: {fileID: 2696850498379052964}
   m_Layer: 3
-  m_Name: Player
+  m_Name: PlayerObj
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,6 +334,7 @@ MonoBehaviour:
   crouchspeed: 5
   walkspeed: 0
   climbspeed: 3
+  groundmult: 10
   rotation: 0
   jumpKey: 32
   sprintKey: 304
@@ -360,13 +361,17 @@ MonoBehaviour:
   player_Climbing: {fileID: 3952122559926541695}
   ledge_Grab: {fileID: 2696850498379052964}
   modeltransform: {fileID: 1835324815879007854}
-  animator: {fileID: 0}
+  animatore: {fileID: 0}
   sprinting: 0
   crouching: 0
   climbing: 0
   freeze: 0
   unlimited: 0
   restricted: 0
+  ensnared: 0
+  debuffname: 
+  debuffduration: 0
+  debuffpower: 0
 --- !u!114 &7526290610132588217
 MonoBehaviour:
   m_ObjectHideFlags: 0
