@@ -66,9 +66,13 @@ public class Player : LifeEntity
         
     }
 
-    public void Health(int value)
+    public override void Health(int healQuantity)
     {
-        
+        base.Health(healQuantity);
+
+        ManagerUI.UpdateLife(life.Live, life.lifeMax);
+
+        print("se curo");
     }
 
     public override void TakeDamage(int damage)

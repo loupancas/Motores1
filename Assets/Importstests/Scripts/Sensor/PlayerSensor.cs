@@ -7,18 +7,18 @@ public class PlayerSensor : MonoBehaviour
 {
     [SerializeField] UnityEvent EV_OnplayerEnter;
     [SerializeField] UnityEvent EV_OnplayerExit;
-    [SerializeField] LayerMask playermask;
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == playermask)
-        {
+       
+        
             if (isPlayer(other))
             {
                 print("main player");
                 EV_OnplayerEnter.Invoke();
             }
 
-        }
+        
 
 
 
@@ -27,14 +27,13 @@ public class PlayerSensor : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == playermask)
-        {
+        
             if (isPlayer(other))
             {
                 print("player exit");
                 EV_OnplayerExit.Invoke();
             }
-        }
+        
 
 
 
