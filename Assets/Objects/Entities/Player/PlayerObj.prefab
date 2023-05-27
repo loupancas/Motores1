@@ -387,7 +387,7 @@ MonoBehaviour:
   playerorientation: {fileID: 4529771275831774105}
   playerobj: {fileID: 2547104704262693634}
   maxslidetime: 0.75
-  slideforce: 20
+  slideforce: 300
   slideYscale: 0.5
   slidekey: 306
 --- !u!114 &3952122559926541695
@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialLife: 100
+  maxLife: 100
   ManagerUI: {fileID: 0}
   weapon1: 49
   weapon2: 50
