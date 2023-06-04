@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject playerInstance;
-
+    public Player player;
     private void Awake()
     {
         if(instance==null)
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
     }
 
     
-    public Player player;
+    
     public Transform camPos;
     public Transform weaponpos;
     
@@ -48,13 +49,17 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        player.subscribeToDeath(onPlayerDeath);
         for (int i = 0; i < objects.Count; i++)
         {
             objects[i].Initialize();
         }
     }
 
-
+    void onPlayerDeath()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
 
 
     bool pause = false;
