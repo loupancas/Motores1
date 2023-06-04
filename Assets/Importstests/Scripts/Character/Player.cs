@@ -4,7 +4,7 @@ using UnityEngine;
 using Entities.LifeSystem;
 using Entities.WeaponHolder;
 
-public class Player : LifeEntity
+public class Player : LifeEntity, IEnemyAttack, IBulletDamage
 {
     public ManagerUI ManagerUI;
     public WeaponHolder weaponholder;
@@ -83,5 +83,16 @@ public class Player : LifeEntity
 
     }
 
+    public void BulletDmg(int dmg)
+    {
+        TakeDamage(dmg);
+        Debug.Log("ataque bala");
+    }
+
+    public void ContactAttack(int dmg)
+    {
+        TakeDamage(dmg);
+        Debug.Log("ataque especial");
+    }
 
 }

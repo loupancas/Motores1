@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemigo2 : Enemy
+public class Enemigo_Teletransport : Enemy
 {
     private float moveRate = 2f;
     private float moveTimer;
     [SerializeField] private float minX, maxX, minY, maxY;
+    public int cantidadDmg = 20;
     protected override void introduction()
     {
         //base.introduction();
@@ -31,4 +32,19 @@ public class Enemigo2 : Enemy
             moveTimer = 0;
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        var damageable = other.GetComponent<IEnemyAttack>();
+
+        if (damageable != null)
+        {
+            damageable.ContactAttack(cantidadDmg);
+        }
+
+
+    }
+
+
+
 }

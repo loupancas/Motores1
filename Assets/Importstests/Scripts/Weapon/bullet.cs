@@ -34,7 +34,7 @@ public class bullet : MonoBehaviour
             if (Rompible)
             {
                 Debug.Log("el daño realizado es" + damage);
-                Rompible.golpe(damage); // llama a la funcion golpe del otro script
+                Rompible.BulletDmg(damage); // llama a la funcion golpe del otro script
 
             }
 

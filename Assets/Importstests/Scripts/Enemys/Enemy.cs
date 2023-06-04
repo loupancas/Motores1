@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,IBulletDamage
 {
     public float rangodeAlerta;
     public LayerMask playerMask;
@@ -119,7 +119,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void golpe(int damageRecibido) // en cada golpe se irá perdiendo vida hasta que finalmente el enemigo se destruye , esto es una funcion publica
+    public void BulletDmg(int damageRecibido) // en cada golpe se irá perdiendo vida hasta que finalmente el enemigo se destruye , esto es una funcion publica
     {
 
 
@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour
         {
 
             Debug.Log("Haz eliminado al enemigo");
-            Destroy(gameObject);
+            Death();
         }
         else
         {

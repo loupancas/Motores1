@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemigo1 : Enemy
+public class Enemigo_Chaser : Enemy
 
 {
     public Transform waypoint1;
     public Transform waypoint2;
     public Transform waypointT;
+
+    public int cantidadDmg = 10;
 
     private void Awake()
     {
@@ -42,6 +44,22 @@ public class Enemigo1 : Enemy
 
 
     }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        var damageable = (IEnemyAttack)other.GetComponent<Player>();//
+
+        if (damageable != null)
+        {
+            damageable.ContactAttack(cantidadDmg);
+        }
+
+
+
+    }
+
+
 
 
 }
