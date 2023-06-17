@@ -87,6 +87,25 @@ namespace tools
 
         }
 
+        public static float GetMinimumNumber(this List<float> currentnum, int IndexLenght)
+        {
+            float minimum = float.MaxValue;
+            float result = 0;
+
+            for (int I = 0; I < IndexLenght; I++)
+            {
+                if (currentnum[I] < minimum)
+                {
+                    minimum = currentnum[I];
+                    result = currentnum[I];
+                }
+
+            }
+
+            return result;
+
+        }
+
         public static GameObject GetClosestinList(this List<GameObject> col, Vector3 PositionCaller) 
         {
             float Closer = float.MaxValue;

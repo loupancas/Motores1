@@ -36,7 +36,10 @@ public class BearTrapScript : MonoBehaviour
             GetComponent<Renderer>().material.color = Color.red;
 
             playerlife.TakeDamage(10);
-            player_Move.debuff();
+            //player_Move.debuff();
+
+            BuffManager.instance.ExecuteBuff("Snare");
+            BuffManager.instance.ExecuteBuff("Fire");
 
         }
         else

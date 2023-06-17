@@ -435,6 +435,11 @@ public class Player_Move : MonoBehaviour
     public string debuffname;
     public float debuffduration, debuffpower;
 
+    public void Snare(bool active)
+    {
+        groundmult = active ? groundmult * (0.2f) : 10f ;
+    }
+
 
     float debufftimer, debuffpulse;
     public void debuff()
@@ -448,13 +453,13 @@ public class Player_Move : MonoBehaviour
                 if (debuffpulse <= debufftimer)
                 {
                     debuffpulse += Time.deltaTime;
-                    groundmult = groundmult * (0.8f * debuffpower);
+                    
                     ensnared= true;
                 }
                 else
                 {
                     debuffpulse = 0;
-                    groundmult = 10f;
+                    
                     ensnared = false;
                     debuffname = null; break;
                 }
