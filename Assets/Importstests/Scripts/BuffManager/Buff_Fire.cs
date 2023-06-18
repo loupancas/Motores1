@@ -24,17 +24,17 @@ public class Buff_Fire : BuffItem
         
     }
 
-    float timer;
+    float timerFire;
     public float fireRate = 0.1f;
     protected override void OnTick(float timeDelta)
     {
-        if (timer < fireRate)
+        if (timerFire < fireRate)
         {
-            timer = timer + 1 * timeDelta;
+            timerFire = timerFire + 1 * timeDelta;
         }
         else
         {
-            timer = 0;
+            timerFire = 0;
             player.TakeDamage(1);
         }
 
