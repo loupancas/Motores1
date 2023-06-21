@@ -9,6 +9,7 @@ public class Playercamera : MonoBehaviour
 
     public Transform cameraorientation;
     public Transform weaponpos;
+    public Transform Flashlight;
 
     float Xrotation;
     float Yrotation;
@@ -38,7 +39,11 @@ public class Playercamera : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(Xrotation, Yrotation, 0);
         cameraorientation.rotation=Quaternion.Euler(0,Yrotation, 0);
+
+        Flashlight.transform.position = this.transform.position;
+        Flashlight.transform.rotation = this.transform.rotation;
     }
+
 
 
 }

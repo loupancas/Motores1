@@ -16,14 +16,15 @@ public class TpTrigger : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.transform.tag == Playertag)
+
+        if (other.transform.tag == Playertag)
         {
             Player.transform.position = Tp_Point.position;
 
         }
-
     }
 
 }
