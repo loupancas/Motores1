@@ -129,6 +129,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!1 &3288348875793409365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4070288591784347783}
+  m_Layer: 0
+  m_Name: PointToDrop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4070288591784347783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3288348875793409365}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.55, y: 0.666, z: 0.472}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8937150237214610822}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4994269176096245379
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +304,8 @@ GameObject:
   - component: {fileID: 3952122559926541695}
   - component: {fileID: 1479613808}
   - component: {fileID: 2696850498379052964}
+  - component: {fileID: 7028372608165559556}
+  - component: {fileID: 4374522144182833342}
   m_Layer: 3
   m_Name: PlayerObj
   m_TagString: Player
@@ -297,6 +330,7 @@ Transform:
   - {fileID: 1835324815879007854}
   - {fileID: 7991251339206807823}
   - {fileID: 2424439752788079858}
+  - {fileID: 4070288591784347783}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -473,6 +507,34 @@ MonoBehaviour:
   Ledges:
     serializedVersion: 2
     m_Bits: 4096
+--- !u!114 &7028372608165559556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615787014974170500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8055bcb45f68b4448d79d7e78021515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4374522144182833342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615787014974170500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5708e97e89ed274699625c8fb78acdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaser: {fileID: 0}
+  dispara: {fileID: 0}
+  teletransporte: {fileID: 0}
+  flyer: {fileID: 0}
 --- !u!1001 &2230085899181361541
 PrefabInstance:
   m_ObjectHideFlags: 0
