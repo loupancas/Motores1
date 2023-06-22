@@ -19,6 +19,11 @@ public class Weapon : MonoBehaviour
     [SerializeField] protected bool isenabled;
     [SerializeField] protected bool onground;
 
+    /// <summary>
+    /// Start Weapon - 
+    /// Se toma la referencia del componente player del player
+    /// y el collider de la propia arma.
+    /// </summary>
     protected virtual void Start()
     {
         playerref = GameManager.instance.player;
@@ -48,6 +53,12 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Recharge - 
+    /// Se añade balas a la variable bullets. 
+    /// </summary>
+    /// <param name="recharge">Cantidad de balas a añadir.</param> 
+    ///  
     public virtual void Recharge(int recharge)
     {
         bullets += recharge;
@@ -57,7 +68,12 @@ public class Weapon : MonoBehaviour
     {
 
     }
-
+    /// <summary>
+    /// OnTriggerEnter Weapon
+    /// </summary>
+    /// Si el player es quien toca el arma,
+    /// Se almacena en el WeaponHolderm con el ID del arma.
+    /// <param name="other"></param>
     protected void OnTriggerEnter(Collider other)
     { 
         if(other.gameObject.name == "Player")

@@ -13,7 +13,11 @@ public class Shoot : Weapon
         base.Start();
         ID = 0;
     }
-
+    /// <summary>
+    /// Attack Shoot - 
+    /// Se instancia desde el arma de cañon una bala con la pulsación del boton
+    /// Fire1. Esto esta limitado a un Rate que impide que se disparen balas a mansalva.
+    /// </summary>
     public override void Attack()
     {
         base.Attack();
