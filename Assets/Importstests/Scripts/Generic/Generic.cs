@@ -15,7 +15,7 @@ public class Generic : MonoBehaviour
     {
         //Weapon[] inventory = { new Weapon("Arma1"), new Weapon("Arma2") };
 
-        Handler<Weapon> armory = new Handler<Weapon>(inventory);
+        //Handler<Weapon> armory = new Handler<Weapon>(inventory);
        // armory.GetCurrent().Shoot();
 
     }

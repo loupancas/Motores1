@@ -11,7 +11,7 @@ public class Inventario : MonoBehaviour
         instance = this;
     }
     public static event Action<List<StackItem>> OnInventoryChange;
-
+    public static event Action<List<StackItem>> OnInventoryUpdate;
     public List<StackItem> inventory = new List<StackItem>();
     private Dictionary<ItemData, StackItem> itemDictionary = new Dictionary<ItemData, StackItem>(); // para chequear si existe o no en el inventario
 
@@ -28,8 +28,14 @@ public class Inventario : MonoBehaviour
     {
         if (inventory.Count > 0 && inventory.Count >= index + 1)
         {
-            string nameUsable = inventory[index].itemData.UsableName;
-            UsableManager.instance.Use(nameUsable);
+            if(inventory[index].StackSize>0) //existe en el stack?
+            {
+                string nameUsable = inventory[index].itemData.UsableName;
+                UsableManager.instance.Use(nameUsable);
+                inventory[index].RemoveFromStack();
+                OnInventoryUpdate.Invoke(inventory);
+            }
+            
         }
     }
 
@@ -43,6 +49,7 @@ public class Inventario : MonoBehaviour
             {
                 inventory[i].addToStack();
                 Debug.Log($"{ itemData.displayName} La cantidad total ahora es {inventory.Count + 1}");
+                OnInventoryUpdate.Invoke(inventory);
                 return;
             }
         }
