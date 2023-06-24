@@ -2401,6 +2401,7 @@ MonoBehaviour:
   sensitivityY: 400
   cameraorientation: {fileID: 258145372838345528}
   weaponpos: {fileID: 2126117488}
+  Flashlight: {fileID: 963194228}
 --- !u!1 &986343965
 GameObject:
   m_ObjectHideFlags: 0
