@@ -143,13 +143,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395d8da06755c6f4ea7d34a792af245d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 9148805715671217601}
+  spawnpoint: {fileID: 0}
   layermask:
     serializedVersion: 2
     m_Bits: 128
+  ID: 0
+  maxbullet: 0
+  bullets: 0
   scope: 10
-  smooth: 10
   strenght: 50
+  isenabled: 0
+  onground: 0
+  smooth: 10
   sensitivescrollY: 1
   minDist: 1
   maxDist: 8
