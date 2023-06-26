@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Entities.WeaponHolder;
+using UnityEngine.Events;
 
 public class Player_Move : MonoBehaviour
 {
@@ -27,6 +28,15 @@ public class Player_Move : MonoBehaviour
     Rigidbody Rb;
 
     public float rotation;
+
+    [Header("Eventos")]
+    public UnityEvent FallingEvent;
+    public UnityEvent StopFallingEvent;
+    public UnityEvent WalkingEvent;
+    public UnityEvent StopWalking;
+    public UnityEvent SprintEvent;
+    public UnityEvent JumpEvent;
+    public UnityEvent StopSprint;
 
     [Header("keycodes")]
     [SerializeField] KeyCode jumpKey = KeyCode.Space;
@@ -67,6 +77,8 @@ public class Player_Move : MonoBehaviour
     public Player_Ledge_Grab ledge_Grab;
     public Transform modeltransform;
     public Animator animatore;
+    public GameManager Manager;
+    public SoundManager SoundManager;
     
 
     [Header("Movementsituation")]
@@ -155,8 +167,6 @@ public class Player_Move : MonoBehaviour
     {
         horizontalimput = Input.GetAxisRaw("Horizontal");
         verticalimput = Input.GetAxisRaw("Vertical");
-
-       
         //jump
         if (Input.GetKey(jumpKey) && readyjump && grounded && !player_Climbing.exitingwall && !ensnared)
         {
@@ -202,6 +212,8 @@ public class Player_Move : MonoBehaviour
         {
             state = Movementstate.freeze;
             Rb.velocity = Vector3.zero;
+            StopWalking.Invoke();
+            StopSprint.Invoke();
         }
 
         // estado -  sin limites
@@ -209,7 +221,10 @@ public class Player_Move : MonoBehaviour
         {
             state = Movementstate.unlimited;
             Movespeed = 999f;
+            StopWalking.Invoke();
+            StopSprint.Invoke();
             return;
+           
         }
 
         //estado - trepar
@@ -217,12 +232,16 @@ public class Player_Move : MonoBehaviour
         {
             state = Movementstate.climbing;
             Movespeed = climbspeed;
+            StopWalking.Invoke();
+            StopSprint.Invoke();
         }
 
         //estado - saliendo trepar
         else if (climbing && player_Climbing.exitingwall)
         {
             state = Movementstate.jumpwall;
+            StopWalking.Invoke();
+            StopSprint.Invoke();
         }
 
         //estado - correr
@@ -232,6 +251,8 @@ public class Player_Move : MonoBehaviour
             Movespeed = sprintspeed;
             sprinting = true;
             crouching = false;
+            SprintEvent.Invoke();
+            StopSprint.Invoke();
             animatore.SetBool("movement",true);
             animatore.SetBool("running", true);
             animatore.SetBool("crouched", false);
@@ -258,7 +279,9 @@ public class Player_Move : MonoBehaviour
         else if (grounded && Rb.velocity != Vector3.zero)
         {
             state = Movementstate.walking;
-            Movespeed = walkspeed;
+            Movespeed = 7;
+            WalkingEvent.Invoke();
+       
 
             crouching = false;
             sprinting = false;
@@ -271,8 +294,9 @@ public class Player_Move : MonoBehaviour
         else if(Rb.velocity==Vector3.zero)
         {
             state = Movementstate.idle;
-
-            if(crouching)
+            StopWalking.Invoke();
+            StopSprint.Invoke();
+            if (crouching)
             {
                 animatore.SetBool("movement", false);
                 animatore.SetBool("running", false);
@@ -291,7 +315,8 @@ public class Player_Move : MonoBehaviour
         else
         {
             state = Movementstate.jumping;
-            
+            StopWalking.Invoke();
+            StopSprint.Invoke();
             animatore.SetBool("movement", false);
             animatore.SetBool("running", false);
             animatore.SetBool("crouched", false);
@@ -421,9 +446,14 @@ public class Player_Move : MonoBehaviour
         {
             animatore.SetBool("falling", true);
 
+            if(Rb.velocity.y < -1.0F)
+            {
+                FallingEvent.Invoke();
+            }
         }
         else
         {
+            StopFallingEvent.Invoke();
             animatore.SetBool("falling",false);
             return;
         }
