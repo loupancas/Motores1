@@ -14,7 +14,7 @@ namespace Entities.WeaponHolder
         public Transform weaponpos;
         public Transform camera;
         public int actualID = 0;
-
+        public Handler<Weapon> weapons;
         /// <summary>
         /// Constructor de WeaponHolder
         /// </summary>
@@ -25,7 +25,8 @@ namespace Entities.WeaponHolder
             weaponpos = _weaponpos;
             camera = _camera;
             weaponholder = new Weapon[10];
-            weapon = weaponholder[0];
+            weapons = new Handler<Weapon>(weaponholder);
+            weapon = weapons.Select(0);
         }
 
         /// <summary>
@@ -36,8 +37,9 @@ namespace Entities.WeaponHolder
         /// <param name="_weapon">El arma.</param>
         public void AddWeapon(int ID, Weapon _weapon)
         {
-               
-            weaponholder[ID] = _weapon;
+            weapons.AddItem(ID, _weapon);
+            
+            //weaponholder[ID] = _weapon;
             ChangeWeapon(ID);
         }
         /// <summary>
@@ -47,7 +49,8 @@ namespace Entities.WeaponHolder
         /// <param name="ID"></param>
         public void RemoveWeapon(int ID)
         {
-            weaponholder[ID] = null;
+            weapons.SetNullItem(ID);
+            //weaponholder[ID] = null;
         }
         /// <summary>
         /// ChangeWeapon - 
@@ -57,25 +60,38 @@ namespace Entities.WeaponHolder
         /// <param name="ID">ID enviado por el player para determinar el arma elegida.</param>
         public void ChangeWeapon(int ID)
         {
-            if ((ID <= weaponholder.Length - 1) && ID >= 0)
+            if (ID > weapons.ArraySize()) return;
+            if(weapons.Select(actualID) != null && weapons.Select(ID) != null)
             {
-                if(weaponholder[ID] != null)
-                {
-                    if(weaponholder[actualID] != null)
-                    {
-                        weaponholder[actualID].gameObject.SetActive(false);
-                    }
-                    
-                    weaponholder[ID].gameObject.SetActive(true);                    
-                    weapon = weaponholder[ID];
-                    Debug.Log("arma " + weapon);
-                    actualID = ID;
-                }
-                else
-                {
-                    Debug.Log("No hay arma pai");
-                }
+                weapons.Select(actualID).gameObject.SetActive(false);
+                weapons.Select(ID).gameObject.SetActive(true);
+                weapon = weapons.Select(ID);
+                actualID = ID;
             }
+            else
+            {
+                Debug.Log("No hay arma pai");
+            }
+            //if ((ID <= weaponholder.Length - 1) && ID >= 0)
+            //{
+            //    if (weaponholder[ID] != null)
+            //    {
+            //        if (weaponholder[actualID] != null)
+            //        {
+            //            weaponholder[actualID].gameObject.SetActive(false);
+            //        }
+
+
+            //        weaponholder[ID].gameObject.SetActive(true);
+            //        weapon = weaponholder[ID];
+            //        Debug.Log("arma " + weapon);
+            //        actualID = ID;
+            //    }
+            //    else
+            //    {
+                    
+            //    }
+            //}
 
         }
 

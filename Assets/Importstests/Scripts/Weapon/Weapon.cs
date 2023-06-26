@@ -78,9 +78,7 @@ public class Weapon : MonoBehaviour
     { 
         if(other.gameObject.name == "Player")
         {
-            Debug.Log(playerref);
             onground = false;
-            //Deberia cargar el objeto Weapon
             playerref.weaponholder.AddWeapon(ID, this);
             col.enabled = false;
         }
