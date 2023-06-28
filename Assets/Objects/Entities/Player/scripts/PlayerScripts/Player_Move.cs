@@ -252,7 +252,7 @@ public class Player_Move : MonoBehaviour
             sprinting = true;
             crouching = false;
             SprintEvent.Invoke();
-            StopSprint.Invoke();
+            StopWalking.Invoke();
             animatore.SetBool("movement",true);
             animatore.SetBool("running", true);
             animatore.SetBool("crouched", false);
@@ -281,6 +281,7 @@ public class Player_Move : MonoBehaviour
             state = Movementstate.walking;
             Movespeed = 7;
             WalkingEvent.Invoke();
+            StopSprint.Invoke();
        
 
             crouching = false;
