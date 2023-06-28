@@ -11,7 +11,7 @@ namespace tools
 
     public static class MyTools
     {
- 
+        // patricio malvasio maddalena (extensiones)
         public static float SumarNum(this float A, float B) // sumar floats
         {
             float result = A + B;
@@ -49,7 +49,7 @@ namespace tools
             return currentindex;
         }
 
-        public static float GetMaximumNumber (this float[] currentnum, int IndexLenght)
+        public static float GetMaximumNumber(this float[] currentnum, int IndexLenght)
         {
             float maximum = 0;
             float result= 0;
@@ -64,6 +64,23 @@ namespace tools
 
             }
 
+            return result;
+        }
+
+
+        public static float GetMaximumNumber(this List<float> currentnum, int IndexLenght)
+        {
+            float maximum = 0;
+            float result = 0;
+
+            for (int I = 0; I < IndexLenght; I++)
+            {
+                if (currentnum[I] > maximum)
+                {
+                    maximum = currentnum[I];
+                    result = currentnum[I];
+                }
+            }
             return result;
         }
 
@@ -148,7 +165,7 @@ namespace tools
 
         }
 
-
+        //generico que devuelve un generic component (puede ser un gameobject, un transform, etc)
         public static T GetMostClosest<T>(this T[] col, Vector3 posPlayer, Func<T, bool> predicate) where T : Component
         {
             float mostClose = int.MaxValue;

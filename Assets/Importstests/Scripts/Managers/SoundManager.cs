@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    //patricio malvasio maddalena ( eventos extras)
+
+
     [Header("variables")]
     public string startingMusic;
 

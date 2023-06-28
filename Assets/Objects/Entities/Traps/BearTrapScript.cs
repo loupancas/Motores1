@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class BearTrapScript : MonoBehaviour
 {
+    //patricio malvasio maddalena, uso de diccionarios
+
+
     public GameObject beartrap;
     public GameObject player;
     [SerializeField] Player_Move player_Move;

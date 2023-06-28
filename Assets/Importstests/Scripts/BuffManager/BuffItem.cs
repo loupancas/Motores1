@@ -5,31 +5,31 @@ using UnityEngine;
 
 public abstract class BuffItem : MonoBehaviour
 {
-    [SerializeField] string id = "default";
+    [SerializeField] string id = "default"; // id del buff, usado par nombrarlo
     public string ID { get { return id; } }
 
     bool isActive = false;
     [SerializeField] bool autoTime = false;
     float timer;
     [SerializeField] float time_to_end = 2f;
-    Action<string> OnFinish;
+    Action<string> OnFinish; // accion de finalizado de buff
 
     protected virtual void Start()
     {
         //si se necesita overridear
     }
 
-    public void SUbscribeToFInish(Action<string> _OnFinish)
+    public void SUbscribeToFInish(Action<string> _OnFinish) // transformamos la accion string _onfinish entregada por el buff manager a la variable interna onfinish
     {
         OnFinish = _OnFinish;
     }
 
-    public void Begin()
+    public void Begin() //inicio del buff 
     {
         isActive = true;
         OnBegin();
     }
-    public void End()
+    public void End() // finalizado del buff
     {
         isActive = false;
         OnEnd();
@@ -38,7 +38,7 @@ public abstract class BuffItem : MonoBehaviour
     {
         if (isActive)
         {
-            OnTick(Time.deltaTime);
+            OnTick(Time.deltaTime); // auto worn off del buff
 
             if (autoTime)
             {
@@ -50,7 +50,7 @@ public abstract class BuffItem : MonoBehaviour
                 else
                 {
                     timer = 0;
-                    OnFinish.Invoke(id);
+                    OnFinish.Invoke(id); // llamado del evento onfinish del buff
                 }
             }
         }
