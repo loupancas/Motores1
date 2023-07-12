@@ -13,6 +13,7 @@ public class VisionAgent : MonoBehaviour
     public TurretStealth TurretScript;
     public CentreofMass TargetCentre;
     [SerializeField] Transform LineOfSightPivot;
+    public LayerMask player;
 
     [Header("variables")]
     [SerializeField] float Viewangle;
@@ -107,7 +108,8 @@ public class VisionAgent : MonoBehaviour
         Ray ray = new Ray(LineOfSightPivot.position, direction);
 
         RaycastHit rayhit;
-        if(Physics.Raycast(ray, out rayhit))
+        Debug.DrawRay(transform.position, direction,Color.red);
+        if(Physics.Raycast(ray, out rayhit,player))
         {
             if(rayhit.transform== Target.transform)
             {

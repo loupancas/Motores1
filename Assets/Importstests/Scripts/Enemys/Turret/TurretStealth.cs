@@ -11,9 +11,11 @@ public class TurretStealth : MonoBehaviour
     public GameObject Target;
     public GameManager GameManager;
     public GameObject TurretObj;
+    public GameObject TurretCannon;
     [SerializeField] protected AIState state;
     public GameObject bullet;
     public VisionAgent VisionAgent;
+    public ParticleSystem particles;
 
     [Header("Variables")]
     public float AggroRange;
@@ -29,6 +31,7 @@ public class TurretStealth : MonoBehaviour
     public LayerMask Player;
     public RaycastHit HitInfo;
     public bool detectedplayer;
+
 
     Vector3 originalRot;
     // Start is called before the first frame update
@@ -59,6 +62,11 @@ public class TurretStealth : MonoBehaviour
     // Update is called once per frame
     protected virtual void FixedUpdate()
     {
+        if(state== AIState.dead)
+        {
+            return;
+        }
+
         if (state == AIState.tracking || state == AIState.shooting && detectedplayer)
         {
             //girar la torreta al jugador
@@ -91,9 +99,14 @@ public class TurretStealth : MonoBehaviour
             state = AIState.Idle;
             VisionAgent.TargetInRange = false;
         }
-        else
+        else if(distanceaggro <= AggroRange && detectedplayer == false)
         {
             state = AIState.guarding;
+            VisionAgent.TargetInRange = true;
+        }
+        else if(distanceaggro <= AggroRange && detectedplayer ==true)
+        {
+            state = AIState.tracking;
             VisionAgent.TargetInRange = true;
         }
     }
@@ -109,6 +122,7 @@ public class TurretStealth : MonoBehaviour
         {
             ShootTurret();
             state = AIState.shooting;
+            pulsefire = 0;
         }
         else
         {
@@ -133,13 +147,16 @@ public class TurretStealth : MonoBehaviour
        
     }
 
-    protected virtual void ShootTurret()
+    
+    public void ShootTurret()
     {
         print("bang del turret");
-
+        //GameObject bulletshot;
+        //bulletshot = Instantiate(bullet, TurretCannon.transform.position, new Quaternion(TurretCannon.transform.rotation.x, TurretCannon.transform.rotation.y-45f, TurretCannon.transform.rotation.z, TurretCannon.transform.rotation.w));
+        particles.Play();
     }
 
-    protected virtual void Deactivate()
+    public void Deactivate()
     {
         state = AIState.dead;
     }
