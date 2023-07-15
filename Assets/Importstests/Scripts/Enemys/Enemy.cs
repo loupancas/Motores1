@@ -14,8 +14,9 @@ public class Enemy : MonoBehaviour,IBulletDamage
     [SerializeField] private Image healthbarsprite;
     [SerializeField] private string enemyName;
     [SerializeField] private float moveSpeed;
-    private float healthPoint;
+    [SerializeField] private float healthPoint;
     [SerializeField] private float maxHealthPoint;
+    [SerializeField] private bool HasHealthBar; // toggle para indicar si contiene un HPbar. 
     public Transform player; // target player
 
 
@@ -39,7 +40,7 @@ public class Enemy : MonoBehaviour,IBulletDamage
 
 
 
-        introduction();
+        //introduction();
 
     }
 
@@ -47,7 +48,11 @@ public class Enemy : MonoBehaviour,IBulletDamage
     {
         Move();
 
-        updateHealthbar(maxHealthPoint, healthPoint);
+        if( HasHealthBar == true)
+        {
+            updateHealthbar(maxHealthPoint, healthPoint);
+        }
+        
         //if(healthPoint<=0)
         //{
         //Death();
