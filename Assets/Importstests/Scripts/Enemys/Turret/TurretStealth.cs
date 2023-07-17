@@ -16,6 +16,7 @@ public class TurretStealth : MonoBehaviour
     public GameObject bullet;
     public VisionAgent VisionAgent;
     public ParticleSystem particles;
+    public GameObject Mylight;
 
     [Header("Variables")]
     public float AggroRange;
@@ -64,21 +65,25 @@ public class TurretStealth : MonoBehaviour
     {
         if(state== AIState.dead)
         {
+            Mylight.GetComponent<Light>().enabled = false;
             return;
         }
 
         if (state == AIState.tracking || state == AIState.shooting && detectedplayer)
         {
+            Mylight.GetComponent<Light>().color= Color.red;
             //girar la torreta al jugador
             TurnTurretToPlayer();
         }
         else if (detectedplayer == false)
         {
+            Mylight.GetComponent<Light>().color = Color.blue;
             state = AIState.guarding;
             Guardingmovement();
         }
         else if(detectedplayer == true)
         {
+            Mylight.GetComponent<Light>().color = Color.red;
             state = AIState.tracking;
             TurnTurretToPlayer();
         }
@@ -89,6 +94,7 @@ public class TurretStealth : MonoBehaviour
     {
         if (state == AIState.dead)
         {
+
             return;
         }
         // calculo de aggrorange
@@ -134,8 +140,7 @@ public class TurretStealth : MonoBehaviour
     
     public void Guardingmovement()
     {
-        TurretObj.transform.localRotation = Quaternion.Euler(originalRot.x, Mathf.PingPong(Time.time * GuardRotateSpeed, MaxGuardAngle * 2) -MaxGuardAngle, 1f);
-
+        TurretObj.transform.localRotation = Quaternion.Euler(originalRot.x, Mathf.PingPong(Time.time * GuardRotateSpeed, MaxGuardAngle * 2) - MaxGuardAngle, 1f);
         /*if(Physics.Raycast(transform.position,TurretObj.transform.forward,out HitInfo,HitInfoRaycastLenght,Player))
         {
             print("he visto al player");

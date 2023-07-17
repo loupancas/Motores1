@@ -14,6 +14,7 @@ public class VisionAgent : MonoBehaviour
     public CentreofMass TargetCentre;
     [SerializeField] Transform LineOfSightPivot;
     public LayerMask player;
+    public GameObject MyLight;
 
     [Header("variables")]
     [SerializeField] float Viewangle;
@@ -79,6 +80,7 @@ public class VisionAgent : MonoBehaviour
            if(detectionpulse < DetectionTimer)
            {
                 detectionpulse = detectionpulse + 1 * Time.deltaTime;
+                MyLight.GetComponent<Light>().color = Color.yellow;
 
            }
            else
