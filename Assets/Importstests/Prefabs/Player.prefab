@@ -32,6 +32,51 @@ Transform:
   m_Father: {fileID: 7653217187993056221}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &58018503010053683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8320199785967301037}
+  - component: {fileID: 189095541451600947}
+  m_Layer: 3
+  m_Name: nearplayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8320199785967301037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58018503010053683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.3599436, y: 3.3599436, z: 3.3599436}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1925151150928602162}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &189095541451600947
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58018503010053683}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &152281334752595378
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +406,7 @@ Transform:
   - {fileID: 600668490889191611}
   - {fileID: 5122271814717130054}
   - {fileID: 6830889603521624371}
+  - {fileID: 8320199785967301037}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -400,6 +446,27 @@ MonoBehaviour:
   climbspeed: 3
   groundmult: 10
   rotation: 0
+  FallingEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  StopFallingEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  WalkingEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  StopWalking:
+    m_PersistentCalls:
+      m_Calls: []
+  SprintEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  JumpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  StopSprint:
+    m_PersistentCalls:
+      m_Calls: []
   jumpKey: 32
   sprintKey: 304
   crouchKey: 99
@@ -426,6 +493,8 @@ MonoBehaviour:
   ledge_Grab: {fileID: 0}
   modeltransform: {fileID: 9207823007599058906}
   animatore: {fileID: 0}
+  Manager: {fileID: 0}
+  SoundManager: {fileID: 0}
   sprinting: 0
   crouching: 0
   climbing: 0

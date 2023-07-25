@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class VisionAgent : MonoBehaviour
 {
     [Header("references")]
+    public SFXEnemyManager sounds;
     public GameManager Manager;
     public GameObject Target;
     public UnityEvent Detected,LostDetection;
@@ -21,6 +22,7 @@ public class VisionAgent : MonoBehaviour
     [SerializeField] float Viewdistance;
     public bool TargetInRange;
     [SerializeField] float DetectionTimer;
+    [SerializeField] bool hasdetectedplayer;
     float detectionpulse;
 
 
@@ -52,6 +54,8 @@ public class VisionAgent : MonoBehaviour
             detectionpulse = 0f;
             TurretScript.detectedplayer = false;
             LostDetection.Invoke();
+            hasdetectedplayer= false;
+            sounds.SFXsource.Stop();
             return;
         }
 
@@ -62,6 +66,8 @@ public class VisionAgent : MonoBehaviour
             detectionpulse = 0f;
             TurretScript.detectedplayer = false;
             LostDetection.Invoke();
+            hasdetectedplayer = false;
+            sounds.SFXsource.Stop();
             return;
         }
 
@@ -72,20 +78,30 @@ public class VisionAgent : MonoBehaviour
             detectionpulse = 0f;
             TurretScript.detectedplayer = false;
             LostDetection.Invoke();
+            hasdetectedplayer = false;
+            sounds.SFXsource.Stop();
             return;
         }
 
         if (b == true)
         {
-           if(detectionpulse < DetectionTimer)
+            if(hasdetectedplayer == false)
+            {
+                sounds.PlaySFX("Beep2");
+            }
+   
+
+           if (detectionpulse < DetectionTimer)
            {
                 detectionpulse = detectionpulse + 1 * Time.deltaTime;
                 MyLight.GetComponent<Light>().color = Color.yellow;
+                hasdetectedplayer = true;
 
            }
            else
            {
                 Detected.Invoke();
+
                 TurretScript.detectedplayer = true;
                 
            }

@@ -12,6 +12,7 @@ public class TurretStealth : MonoBehaviour
     public GameManager GameManager;
     public GameObject TurretObj;
     public GameObject TurretCannon;
+    public SFXEnemyManager sounds;
     [SerializeField] protected AIState state;
     public GameObject bullet;
     public VisionAgent VisionAgent;
@@ -42,7 +43,7 @@ public class TurretStealth : MonoBehaviour
         Target = GameManager.playerInstance.gameObject;
         state = AIState.Idle;
         VisionAgent = GetComponentInChildren<VisionAgent>();
-
+        sounds = GetComponent<SFXEnemyManager>();
         originalRot = TurretObj.transform.localRotation.eulerAngles;
     }
 
@@ -112,6 +113,7 @@ public class TurretStealth : MonoBehaviour
         }
         else if(distanceaggro <= AggroRange && detectedplayer ==true)
         {
+           
             state = AIState.tracking;
             VisionAgent.TargetInRange = true;
         }
@@ -155,6 +157,7 @@ public class TurretStealth : MonoBehaviour
     
     public void ShootTurret()
     {
+        sounds.PlaySFX("Fire");
         print("bang del turret");
         //GameObject bulletshot;
         //bulletshot = Instantiate(bullet, TurretCannon.transform.position, new Quaternion(TurretCannon.transform.rotation.x, TurretCannon.transform.rotation.y-45f, TurretCannon.transform.rotation.z, TurretCannon.transform.rotation.w));

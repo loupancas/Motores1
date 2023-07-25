@@ -8,16 +8,18 @@ public class DroneScript : Enemy
 {
     [Header("References")]
     public GameManager manager;
+    public CharacterController characterControl;
     public GameObject Player;
     public ParticleSystem particle;
     public AIState state;
     public UnityEvent FiringEvent;
     public Animator animator;
+    public SFXEnemyManager Sounds;
    
 
     [Header("Variables")]
     public float aggrorange;
-    public float movespeed;
+    public float movespeed,maxmovespeed;
     public int energy, maxenergy;
     public float energyrefill,gainenergycount,timebetweendodges;
     public bool shooting, moved,acting;
@@ -25,6 +27,7 @@ public class DroneScript : Enemy
     public string currstatename = "Move";
     public float switchIA = 0;
     public bool dodging,canDodge;
+    private int randomizemove,randomnoise;
     
 
 
@@ -42,17 +45,23 @@ public class DroneScript : Enemy
     {
         base.Start();
         manager = FindObjectOfType<GameManager>();
+        Sounds = GetComponent<SFXEnemyManager>();
         Player = manager.playerInstance;
         player = manager.playerInstance.transform;
         state = AIState.asleep;
         energy = maxenergy;
 
+        maxmovespeed = movespeed;
+
         dodgepulse = dodgetimer;
     }
+
     public void Update()
     {
         statemachine();
-        
+        Quaternion lookrotation = Quaternion.LookRotation(player.transform.position - this.transform.position);
+        transform.rotation = Quaternion.Slerp(this.transform.rotation, lookrotation, rotationspeed * Time.deltaTime);
+
     }
     public void FixedUpdate()
     {
@@ -73,6 +82,9 @@ public class DroneScript : Enemy
 
                 dodging = false;
 
+                randomnoise = Random.Range(0, 6);
+
+
                 if (switchIA < 2)
                 {
                     switchIA++;
@@ -83,10 +95,20 @@ public class DroneScript : Enemy
                 }
 
                 energyrefill = 0;
-              
+                
+                if(randomnoise == 6)
+                {
+                    Sounds.PlaySFX("idle1");
+                }
+                else if(randomnoise == 3)
+                {
+                    Sounds.PlaySFX("idle2");
+                }
+
             }
         }
 
+        
 
 
     }
@@ -104,14 +126,15 @@ public class DroneScript : Enemy
             state = AIState.Idle;
         }
 
-        else if(energy > 1 && switchIA == 0 && dodging!)
+        else if(energy > 1 && switchIA == 0)
         {
             state = AIState.pursue;
+            randomizemove = Random.Range(0, 2); //randomizar el movimiento
             Move();
             
         }
 
-        else if (energy > 1 && switchIA == 1 && dodging!)
+        else if (energy > 1 && switchIA == 1)
         {
             state = AIState.attack;
             Attack();
@@ -129,12 +152,22 @@ public class DroneScript : Enemy
     {
         rotationspeed = 30f;
         moved = false;
-        Quaternion lookrotation = Quaternion.LookRotation(player.transform.position - this.transform.position);
-        transform.rotation = Quaternion.Slerp(this.transform.rotation, lookrotation, rotationspeed * Time.deltaTime);
+        //Quaternion lookrotation = Quaternion.LookRotation(player.transform.position - this.transform.position);
+        //transform.rotation = Quaternion.Slerp(this.transform.rotation, lookrotation, rotationspeed * Time.deltaTime);
         FiringEvent.Invoke();
+        Invoke("Chargesound", 0f);
+        Invoke("Firesound", 1.19f);
         print("drone has fired");
     }
 
+    private void Chargesound()
+    {
+        Sounds.PlaySFX("charge");
+    }
+    private void Firesound()
+    {
+        Sounds.PlaySFX("fire");
+    }
 
     protected override void Death()
     {
@@ -152,13 +185,20 @@ public class DroneScript : Enemy
     Vector3 movetarget;
     protected override void Move()
     {
-
-        if (moved== false)
+        if (moved== false && randomizemove == 0) // chase player
         {
             movetarget = new Vector3(player.transform.position.x + Random.Range(-ofsetplayer, ofsetplayer), player.transform.position.y + Random.Range(0,ofsetplayer), player.transform.position.z + Random.Range(-ofsetplayer, ofsetplayer));
             energy--;
+            movespeed = maxmovespeed;
             moved = true;
         }
+
+        else if(moved==false && randomizemove == 1) // dodge in place
+        {
+            movetarget = new Vector3(this.transform.position.x + Random.Range(-ofsetplayer*2, ofsetplayer*2), player.transform.position.y + Random.Range(0, ofsetplayer * 1.2f), this.transform.position.z + Random.Range(-ofsetplayer * 2, ofsetplayer * 2));
+            movespeed = movespeed * 1.5f ; energy--;energyrefill +=0.5f ; moved = true;
+        }
+
         rotationspeed = 10f;
         transform.position = Vector3.MoveTowards(transform.position,movetarget, movespeed * Time.deltaTime);
         Quaternion lookrotation = Quaternion.LookRotation(player.transform.position - this.transform.position);
@@ -193,9 +233,7 @@ public class DroneScript : Enemy
 
     public void BeingLookedByPlayer()
     {
-        state = AIState.dodge;
-        print("drone ha esquivado");
-        dodging= true;
+       
     }
 
     public Vector3 Dodgetarget()
