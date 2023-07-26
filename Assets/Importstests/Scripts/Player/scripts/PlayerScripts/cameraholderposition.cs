@@ -37,10 +37,16 @@ public class cameraholderposition : MonoBehaviour
      
         if(Physics.Raycast(raypov, out Hit, layerMaskInteract))
         {
-                if(Hit.collider.gameObject.TryGetComponent(out DroneScript dronescript))
-                {
+
+
+            if(Hit.collider.gameObject.TryGetComponent(out DroneScript dronescript))
+            {
                     dronescript.BeingLookedByPlayer();   
-                }
+            }
+            else if(Hit.collider.gameObject.TryGetComponent(out Lever interactible))
+            {
+               
+            }
 
             print(Hit.collider.name);
         }
