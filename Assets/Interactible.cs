@@ -8,6 +8,7 @@ public  class Interactible : MonoBehaviour
 {
     public UnityEvent ActivateEvent;
     public UnityEvent DeactivateEvent;
+    public bool beinglookedat;
 
     protected virtual void Start()
     {
