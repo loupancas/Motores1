@@ -10356,7 +10356,7 @@ MonoBehaviour:
         m_CallState: 2
   animator: {fileID: 677846229677463997}
   Sounds: {fileID: 0}
-  aggrorange: 50
+  aggrorange: 0
   movespeed: 20
   maxmovespeed: 0
   energy: 0

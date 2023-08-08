@@ -14,6 +14,7 @@ public class Lever : Interactible
     [Header("Variables")]
     [SerializeField] float DistancetoTrigger;
     [SerializeField] bool triggered;
+    [SerializeField] bool canflipflop;
     [SerializeField] KeyCode ActivateKey;
 
 
@@ -27,12 +28,13 @@ public class Lever : Interactible
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject == player || other.CompareTag("Player"))
         {
-            if(Input.GetKeyDown(ActivateKey))
+            if(Input.GetKeyDown(ActivateKey) )
             {
                 InternalLogic();
             }
+            print("player In Range");
         }
     }
 
@@ -43,7 +45,7 @@ public class Lever : Interactible
             Activate();
             triggered = true;
         }
-        else
+        else if (triggered && canflipflop)
         {
             deactivate();
             triggered= false;

@@ -15,6 +15,15 @@ public class LockedDoor : MonoBehaviour
     {
         rb = GetComponentInChildren<Rigidbody>();
         manager = FindObjectOfType<GameManager>();
+
+        if(IsLocked == false)
+        {
+            rb.isKinematic = false;
+        }
+        else
+        {
+            rb.isKinematic = true;
+        }
     }
 
 
