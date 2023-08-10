@@ -5,19 +5,19 @@ using UnityEngine;
 public class TurningLight : MonoBehaviour
 {
     [Header("References y variables")]
-    [SerializeField] Light Lightcomp;
+    [SerializeField] GameObject LightObj;
     public bool IsOn;
 
     void Start()
     {
-        Lightcomp = GetComponentInChildren<Light>();
+
         if (IsOn)
         {
-            Lightcomp.enabled = true;
+            LightObj.SetActive(true);
         }
         else
         {
-            Lightcomp.enabled = false;
+            LightObj.SetActive(false);
         }
 
     }
@@ -26,25 +26,26 @@ public class TurningLight : MonoBehaviour
     {
         if (IsOn)
         {
-            Lightcomp.enabled = true;
+            LightObj.SetActive(true);
         }
-        else
+        else if (IsOn ==false)
         {
-            Lightcomp.enabled = false;
+            LightObj.SetActive(false);
         }
 
     }
 
     public void Switchlight()
     {
-        if(IsOn)
+        if(IsOn == true)
         {
             IsOn = false;
         }
-        else if(IsOn)
+        else if(IsOn == false)
         {
-            IsOn= true;
+            IsOn = true;
         }
+
         Updatelight();
     }
 }

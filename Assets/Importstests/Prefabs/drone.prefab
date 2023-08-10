@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1043525071232944722}
   - component: {fileID: 1043525071232944721}
   - component: {fileID: 1043525071232944720}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 1043525072000545440}
   - component: {fileID: 1043525072000545471}
   - component: {fileID: 1043525072000545470}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: Healthbar  (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 1043525072110585196}
   - component: {fileID: 1043525072110585198}
   - component: {fileID: 1043525072110585197}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 1043525072321460021}
   - component: {fileID: 1043525072321460020}
   - component: {fileID: 1043525072321460022}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: ParticleShooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5172,7 +5172,7 @@ GameObject:
   - component: {fileID: 1043525072418690293}
   - component: {fileID: 1043525072418690291}
   - component: {fileID: 1043525072418690292}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10042,7 +10042,7 @@ GameObject:
   - component: {fileID: 1043525072544908806}
   - component: {fileID: 1043525072544908808}
   - component: {fileID: 1043525072544908807}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: Foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10118,7 +10118,7 @@ GameObject:
   - component: {fileID: 1043525072717492112}
   - component: {fileID: 1043525072717492114}
   - component: {fileID: 1043525072717492113}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10206,7 +10206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1043525072762387709
 Transform:
   m_ObjectHideFlags: 0
@@ -10356,7 +10356,7 @@ MonoBehaviour:
         m_CallState: 2
   animator: {fileID: 677846229677463997}
   Sounds: {fileID: 0}
-  aggrorange: 0
+  aggrorange: 100
   movespeed: 20
   maxmovespeed: 0
   energy: 0
@@ -10368,7 +10368,7 @@ MonoBehaviour:
   moved: 0
   acting: 0
   rotationspeed: 10
-  ofsetplayer: 8
+  ofsetplayer: 3
   currstatename: 
   switchIA: 0
   dodging: 0
@@ -10412,7 +10412,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -10447,7 +10447,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -10521,7 +10521,7 @@ GameObject:
   - component: {fileID: 1043525072810475427}
   - component: {fileID: 1043525072810475429}
   - component: {fileID: 1043525072810475428}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: SubEmitter0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

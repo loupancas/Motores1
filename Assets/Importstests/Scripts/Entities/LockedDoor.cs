@@ -7,6 +7,7 @@ public class LockedDoor : MonoBehaviour
     [Header("references")]
     GameManager manager;
     Rigidbody rb;
+    AudioSource AudioS;
 
     [Header("variables")]
     public bool IsLocked;
@@ -15,6 +16,7 @@ public class LockedDoor : MonoBehaviour
     {
         rb = GetComponentInChildren<Rigidbody>();
         manager = FindObjectOfType<GameManager>();
+        AudioS = GetComponent<AudioSource>();
 
         if(IsLocked == false)
         {
@@ -32,6 +34,8 @@ public class LockedDoor : MonoBehaviour
         if(IsLocked == true)
         {
             IsLocked= false;
+
+            AudioS.Play();
         }
 
         UpdateRb();

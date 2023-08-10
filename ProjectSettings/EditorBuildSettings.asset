@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: ab5999459da7d0946a1b20e7af14631b
+  - enabled: 1
+    path: Assets/Scenes/PatoNext.unity
+    guid: 52f45e26aa3e41a498604b55a208c5bb
   m_configObjects: {}
