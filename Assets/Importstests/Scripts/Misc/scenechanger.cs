@@ -7,8 +7,6 @@ public class scenechanger : MonoBehaviour
 {
     public GameObject instances;
 
-    KeyCode menu = KeyCode.Escape;
-
     public void Awake()
     {
         if(instances !=null && instances != this.gameObject)
@@ -31,14 +29,18 @@ public class scenechanger : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    public void Update()
+    public void Menuloader()
     {
-        if(Input.GetKeyDown(menu))
-        {
-            SceneManager.LoadScene(0);
-        }
+        SceneManager.LoadScene(0);
+    }
+
+    public void IDCLEV(int LevelID)
+    {
+        SceneManager.LoadScene(LevelID);
 
     }
+
+
 
     public void oops()
     {
