@@ -26,7 +26,7 @@ public class scenechanger : MonoBehaviour
     
     public void LoadNano()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(6);
     }
 
     public void Menuloader()

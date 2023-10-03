@@ -10,6 +10,7 @@ public class ActivationTrigger : MonoBehaviour
     public  GameManager manager;
     public GameObject player;
     public UnityEvent triggerEvent;
+    [SerializeField] bool Singleton, IsSingleton;
 
     private void Start()
     {
@@ -20,9 +21,18 @@ public class ActivationTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player || other.CompareTag("Player"))
+        if (other.gameObject == player || other.CompareTag("Player") )
         {
-            triggerEvent.Invoke();
+            if(Singleton == false && IsSingleton == true)
+            {
+                triggerEvent.Invoke();
+                Singleton = true;
+            }
+            else if (IsSingleton== false)
+            {
+                triggerEvent.Invoke();
+            }
+
         }
 
 

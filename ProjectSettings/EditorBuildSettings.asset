@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PatoNext.unity
     guid: 52f45e26aa3e41a498604b55a208c5bb
+  - enabled: 1
+    path: Assets/Scenes/GardenPato.unity
+    guid: e0400de1d04cb534e881cb704db4a497
   m_configObjects: {}
