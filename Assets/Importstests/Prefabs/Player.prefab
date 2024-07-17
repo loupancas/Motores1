@@ -400,6 +400,75 @@ MonoBehaviour:
   climbspeed: 3
   groundmult: 10
   rotation: 0
+  FallingEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  StopFallingEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  WalkingEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlayFootSteps
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  StopWalking:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: StopFootSteps
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  SprintEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: PlayRunStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  JumpEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  StopSprint:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: StopRunSteps
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   jumpKey: 32
   sprintKey: 304
   crouchKey: 99
@@ -426,6 +495,8 @@ MonoBehaviour:
   ledge_Grab: {fileID: 0}
   modeltransform: {fileID: 9207823007599058906}
   animatore: {fileID: 0}
+  Manager: {fileID: 0}
+  SoundManager: {fileID: 0}
   sprinting: 0
   crouching: 0
   climbing: 0
@@ -503,9 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialLife: 100
   maxLife: 100
-  ManagerUI: {fileID: 0}
-  weapon1: 49
-  weapon2: 50
+  ManagerUI: {fileID: 8242187682615455832, guid: 92aaacb6e0b21b74f92162a0d86532d5, type: 3}
 --- !u!114 &4890209024710460944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,7 +642,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1234492811790013488}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 1

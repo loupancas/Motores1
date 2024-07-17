@@ -11,11 +11,18 @@ public class Player : LifeEntity, IEnemyAttack, IBulletDamage
 
     [SerializeField] KeyCode weapon1 = KeyCode.Alpha1;
     [SerializeField] KeyCode weapon2 = KeyCode.Alpha2;
+
+    //private WeaponHandler.Handler<Weapon> armory;
+
+
     protected override void Start()
     {
         base.Start();//life = new Life(100);
         GameManager.instance.playerInstance = gameObject;
-        weaponholder = new WeaponHolder(GameManager.instance.weaponpos, GameManager.instance.camPos);
+        weaponholder = gameObject.AddComponent<WeaponHolder>();
+        weaponholder.Initialize(GameManager.instance.weaponpos, GameManager.instance.camPos);
+
+       
     }
     protected override void OnInitialize()
     {
@@ -46,25 +53,23 @@ public class Player : LifeEntity, IEnemyAttack, IBulletDamage
 
     protected override void OnUpdate()
     {
-        
-        if (Input.GetKey(weapon1))
-        {
-            Debug.Log("cambio a arma 1 ");
-            weaponholder.ChangeWeapon(0);
-        }
-        if (Input.GetKey(weapon2))
-        {
-            Debug.Log("cambio a arma 2 ");
-            weaponholder.ChangeWeapon(1);
-        }
-        if(weaponholder.weapon != null)
+
+      
+        if (weaponholder.weapon != null)
         {
             weaponholder.weapon.Attack();
             weaponholder.weapon.transform.position = weaponholder.weaponpos.position;
-            weaponholder.weapon.transform.forward = weaponholder.camera.forward;
+            weaponholder.weapon.transform.forward = weaponholder.GetComponent<Camera>().transform.forward;
         }
-        
+
+      
+
+
     }
+
+   
+
+   
 
     public override void Health(int healQuantity)
     {

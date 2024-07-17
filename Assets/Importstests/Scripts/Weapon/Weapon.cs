@@ -1,14 +1,16 @@
+using Entities.WeaponHolder;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour 
 {
     [Header("Referencias")]
     [SerializeField] protected Transform spawnpoint;
     [SerializeField] protected LayerMask layermask;
     protected BoxCollider col;
     protected Player playerref;
+    //private WeaponHolder weaponHolder;
 
     [Header("Caracteristicas Arma")]
     [SerializeField] protected int ID;
@@ -27,6 +29,7 @@ public class Weapon : MonoBehaviour
     protected virtual void Start()
     {
         playerref = GameManager.instance.player;
+        //weaponHolder = playerref.GetComponent<WeaponHolder>(); // Obtener referencia al WeaponHolder
         col = GetComponent<BoxCollider>();
     }
 
@@ -75,12 +78,30 @@ public class Weapon : MonoBehaviour
     /// Se almacena en el WeaponHolderm con el ID del arma.
     /// <param name="other"></param>
     protected void OnTriggerEnter(Collider other)
-    { 
-        if(other.gameObject.name == "Player")
+    {
+        if (other.gameObject.name == "Player")
         {
             onground = false;
-            playerref.weaponholder.AddWeapon(ID, this);
-            col.enabled = false;
+            WeaponHolder weaponHolder = playerref.GetComponent<WeaponHolder>();
+            // Obtener el componente Handler<Weapon> y agregar este arma
+            //var weaponHandler = playerref.GetComponent<WeaponHandler.Handler<Weapon>>();
+            if (weaponHolder != null)
+            {
+                weaponHolder.AddWeapon(ID, this);
+                col.enabled = false;
+                Debug.Log("Arma recogida");
+               
+                //PickUpWeapon(this); // Remove weapon from the ground
+            }
+            else
+            {
+                Debug.LogError("No se encontró el componente en el player.");
+            }
         }
     }
+
+   
+
+  
 }
+

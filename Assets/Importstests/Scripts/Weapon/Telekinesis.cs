@@ -19,11 +19,14 @@ public class Telekinesis : Weapon
     [SerializeField] bool distObj;
     [SerializeField] float _distObj;
 
+
     protected override void Start()
     {
         base.Start();
-        ID = 1;
+        ID = 2;
     }
+
+
     // Update is called once per frame
 
     /// <summary>
@@ -35,7 +38,6 @@ public class Telekinesis : Weapon
     /// 
     public override void Attack()
     {
-        base.Attack();
         if (!onground)
         {
             if (Input.GetButtonDown("Fire1") && !hooked)

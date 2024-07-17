@@ -8,74 +8,76 @@ using UnityEngine;
 /// <typeparam name="T"></typeparam>
 public class Handler <T>
 {
-    T[] myArray;
-    int current = 0;
+    private T[] myArray;
+    private int current;
+
     /// <summary>
-    /// Contructor de la clase
+    /// Constructor de la clase Handler.
     /// </summary>
-    /// <param name="_array"></param>
+    /// <param name="_array">Array de elementos tipo T.</param>
     public Handler(T[] _array)
     {
         myArray = _array;
         current = 0;
-
     }
+
     /// <summary>
-    /// Add Item - 
-    /// Añade un objeto generico al arreglo en cierto index</summary>
-    /// Destino en el array del nuevo objeto<param name="index"></param>
-    /// Objeto a insertar en el array.<param name="item"></param>
+    /// Añade un objeto genérico al arreglo en cierto índice.
+    /// </summary>
+    /// <param name="index">Destino en el array del nuevo objeto.</param>
+    /// <param name="item">Objeto a insertar en el array.</param>
     public void AddItem(int index, T item)
     {
         myArray[index] = item;
     }
+
     /// <summary>
-    /// Set Null Item
-    /// - Vuelve null el espacio del array indicado.</summary>
-    /// <param name="index"></param>
+    /// Vuelve nulo el espacio del array indicado.
+    /// </summary>
+    /// <param name="index">Índice del array a ser nulo.</param>
     public void SetNullItem(int index)
     {
         myArray[index] = default(T);
     }
+
     /// <summary>
-    /// Apunta al siguiente index del array.
+    /// Apunta al siguiente índice del array.
     /// </summary>
     public void Next()
     {
         current++;
-        if(current>=myArray.Length)
+        if (current >= myArray.Length)
         {
             current = 0;
         }
     }
+
     /// <summary>
-    /// Select - 
-    /// Devuelve el objeto con el index indicado</summary>
-    /// <param name="index"></param>
-    /// <returns></returns>
+    /// Devuelve el objeto con el índice indicado.
+    /// </summary>
+    /// <param name="index">Índice del objeto a seleccionar.</param>
+    /// <returns>Objeto tipo T en el índice especificado.</returns>
     public T Select(int index)
     {
         return myArray[index];
     }
 
     /// <summary>
-    /// GetCurrent
-    /// - Retorna el objeto actualmente apuntado.</summary>
-    /// <returns></returns>
+    /// Retorna el objeto actualmente apuntado.
+    /// </summary>
+    /// <returns>Objeto tipo T actualmente seleccionado.</returns>
     public T GetCurrent()
     {
         return myArray[current];
     }
 
-
     /// <summary>
-    /// ArraySize
-    /// - Retorna el el ultimo index del  array.</summary>
-    /// <returns></returns>
+    /// Retorna el último índice del array.
+    /// </summary>
+    /// <returns>Último índice del array.</returns>
     public int ArraySize()
     {
         return myArray.Length - 1;
     }
-
 
 }

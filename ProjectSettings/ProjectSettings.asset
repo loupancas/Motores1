@@ -794,11 +794,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: dc72f802-083c-467c-b6f2-7463a0472525
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Motores1
+  organizationId: lourds
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

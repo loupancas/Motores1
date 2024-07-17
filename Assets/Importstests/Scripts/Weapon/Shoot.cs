@@ -8,10 +8,12 @@ public class Shoot : Weapon
     public GameObject bullet;
     public float shotRate = 0.5f;
     private float shotRateTime = 0; // contador
+
+  
     protected override void Start()
     {
         base.Start();
-        ID = 0;
+        ID = 1;
     }
     /// <summary>
     /// Attack Shoot - 
