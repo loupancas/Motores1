@@ -55,15 +55,29 @@ public class Player : LifeEntity, IEnemyAttack, IBulletDamage
     {
 
       
+        //if (weaponholder.weapon != null)
+        //{
+        //    weaponholder.weapon.Attack();
+        //    weaponholder.weapon.transform.position = weaponholder.weaponpos.position;
+        //    weaponholder.weapon.transform.forward = weaponholder.GetComponent<Camera>().transform.forward;
+        //}
+
+
+        if (Input.GetKeyDown(weapon1))
+        {
+            weaponholder.ChangeWeapon(0); // Asume que el arma 1 tiene ID 0
+        }
+        else if (Input.GetKeyDown(weapon2))
+        {
+            weaponholder.ChangeWeapon(1); // Asume que el arma 2 tiene ID 1
+        }
+
         if (weaponholder.weapon != null)
         {
             weaponholder.weapon.Attack();
             weaponholder.weapon.transform.position = weaponholder.weaponpos.position;
-            weaponholder.weapon.transform.forward = weaponholder.GetComponent<Camera>().transform.forward;
+            weaponholder.weapon.transform.forward = weaponholder.camera.forward; // Corrige la obtención de la dirección de la cámara
         }
-
-      
-
 
     }
 

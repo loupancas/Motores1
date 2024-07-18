@@ -25,7 +25,7 @@ namespace Entities.WeaponHolder
         {
             weaponpos = _weaponpos;
             camera = _camera;
-            weaponholder = new Weapon[10];
+            weaponholder = new Weapon[2];
             weapons = new Handler<Weapon>(weaponholder);
             weapon = weapons.Select(0);
         }

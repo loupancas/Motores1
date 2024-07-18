@@ -23,7 +23,7 @@ public class Telekinesis : Weapon
     protected override void Start()
     {
         base.Start();
-        ID = 2;
+        ID = 0;
     }
 
 
@@ -68,6 +68,7 @@ public class Telekinesis : Weapon
         //tiro un raycast
         if (Physics.Raycast(ray, out hit, scope, layermask))
         {
+            Debug.DrawRay(ray.origin, ray.direction * scope, Color.red, 1);
             objectTrans = hit.transform;
             objectRB = hit.rigidbody;
             objectRB.useGravity = false;

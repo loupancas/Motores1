@@ -161,7 +161,7 @@ MonoBehaviour:
   maxDist: 8
   hooked: 0
   distObj: 0
-  _distObj: 0
+  _distObj: 2
 --- !u!65 &966235095683222445
 BoxCollider:
   m_ObjectHideFlags: 0
