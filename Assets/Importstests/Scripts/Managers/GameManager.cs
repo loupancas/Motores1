@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    //TPFinal - Lourdes Pando - Enum para los estados del juego, sobre todo pausa y reanudar
     public static GameManager instance;
     public GameObject playerInstance;
     public Player player;
+    private GameState state;
     private void Awake()
     {
         if(instance==null)
@@ -44,7 +46,9 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        state = GameState.Initializing;
         Invoke("StartGame",0.1f);
+
     }
 
     public void StartGame()
@@ -54,11 +58,13 @@ public class GameManager : MonoBehaviour
         {
             objects[i].Initialize();
         }
+        state = GameState.Playing;
     }
 
     void onPlayerDeath()
     {
         SceneManager.LoadScene("GameOver");
+        state = GameState.GameOver;
     }
 
 
@@ -66,10 +72,31 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && state == GameState.Playing)
         {
-            pause = !pause; // deja de ser pausa
-            Pause(pause);
+            PauseGame();
+        }
+        else if (Input.GetKeyDown(KeyCode.P) && state == GameState.Paused)
+        {
+            ResumeGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        if (state == GameState.Playing)
+        {
+            Time.timeScale = 0f;
+            state = GameState.Paused;
+        }
+    }
+
+    public void ResumeGame()
+    {
+        if (state == GameState.Paused)
+        {
+            Time.timeScale = 1f;
+            state = GameState.Playing;
         }
     }
     public void Pause(bool pause)
@@ -80,6 +107,7 @@ public class GameManager : MonoBehaviour
             {
                 objects[i].Pause();
             }
+
         }
         else
         {
@@ -89,10 +117,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
-
-
-
 
     List<PlayObject> objects = new List<PlayObject>();
     public void AddPlayObject(PlayObject element)
@@ -115,3 +139,12 @@ public class GameManager : MonoBehaviour
 
 
 }
+
+public enum GameState
+{
+    Initializing,
+    Playing,
+    Paused,
+    GameOver
+}
+

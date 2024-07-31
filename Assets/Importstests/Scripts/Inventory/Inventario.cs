@@ -13,7 +13,8 @@ public class Inventario : MonoBehaviour
     public static event Action<List<StackItem>> OnInventoryChange;
     public static event Action<List<StackItem>> OnInventoryUpdate;
     public List<StackItem> inventory = new List<StackItem>();
-    private Dictionary<ItemData, StackItem> itemDictionary = new Dictionary<ItemData, StackItem>(); // para chequear si existe o no en el inventario
+    //TPFinal - Lourdes Pando - Diccionario para chequear si existe o no en el inventario
+    private Dictionary<ItemData, StackItem> itemDictionary = new Dictionary<ItemData, StackItem>(); 
 
     private void Update()
     {

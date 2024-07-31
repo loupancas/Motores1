@@ -7,6 +7,7 @@ namespace Entities.LifeSystem
 
 public class Life 
 {
+        //TPFinal - Lourdes Pando - Getter y Setter de la vida
     private int life;
     public int lifeMax;
 

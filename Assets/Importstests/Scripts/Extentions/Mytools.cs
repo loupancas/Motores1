@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 using System;
 
 namespace tools
@@ -189,7 +186,24 @@ namespace tools
         }
 
 
-
+        public static EnemyData GetClosestEnemy(this EnemyData[] col, Vector3 posPlayer, Func<EnemyData, bool> predicate)
+        {
+            float mostClose = float.MaxValue;
+            EnemyData mcVal = default;
+            for (int i = 0; i < col.Length; i++)
+            {
+                if (predicate.Invoke(col[i]))
+                {
+                    float dist = Vector3.Distance(posPlayer, col[i].position);
+                    if (dist < mostClose)
+                    {
+                        mostClose = dist;
+                        mcVal = col[i];
+                    }
+                }
+            }
+            return mcVal;
+        }
 
 
 

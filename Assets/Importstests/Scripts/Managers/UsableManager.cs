@@ -10,7 +10,7 @@ public class UsableManager : MonoBehaviour
         instance = this;
     }
 
-
+    //TPFinal - Lourdes Pando - Diccionario de usables
     public Usable[] dbUsables;
     Dictionary<string, Usable> usables = new Dictionary<string, Usable>();
 

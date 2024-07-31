@@ -9,22 +9,23 @@ public class Filtro : MonoBehaviour
     [SerializeField] Enemigo_Shooter dispara;
     [SerializeField] Enemigo_Teletransport teletransporte;
     [SerializeField] Flyer flyer;
-    Enemy[] enemies;
+    //Enemy[] enemies;
+    EnemyData[] enemies;
 
 
     private void Start()
     {
-        enemies = new Enemy[4];
+        enemies = new EnemyData[4];
 
         var eC = Instantiate(chaser);
         var eD = Instantiate(dispara);
         var eT = Instantiate(teletransporte);
         var eF = Instantiate(flyer);
 
-        enemies[0] = eC;
-        enemies[1] = eD;
-        enemies[2] = eT;
-        enemies[3] = eF;
+        enemies[0] = new EnemyData(eC, eC.transform.position);
+        enemies[1] = new EnemyData(eD, eD.transform.position);
+        enemies[2] = new EnemyData(eT, eT.transform.position);
+        enemies[3] = new EnemyData(eF, eF.transform.position);
 
 
 
@@ -40,15 +41,12 @@ public class Filtro : MonoBehaviour
 
     public void CheckClosest()
     {
-        Enemy mostClose = enemies.GetMostClosest(this.transform.position, Filtrar);
-
-        Debug.Log(mostClose.gameObject.name);
+        EnemyData mostClose = enemies.GetClosestEnemy(this.transform.position, Filtrar);
+        Debug.Log(mostClose.enemy.gameObject.name);
     }
 
-    bool Filtrar(Enemy Enem)
+    bool Filtrar(EnemyData Enem)
     {
         return true;
-
-       
     }
 }

@@ -50,7 +50,7 @@ public abstract class LifeEntity : PlayObject
 
     }
 
-
+    //TPFinal - Lourdes Pando - Delegate/Event
     public void subscribeToDeath(Action _callback)
     {
         DeathEvent += _callback;
